@@ -15,7 +15,7 @@ load_dotenv(BASE_DIR / ".env")
 # SEGURIDAD
 # ============================================================
 
-SECRET_KEY = "django-insecure-koch-envios-development-key"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-development-only")
 
 DEBUG = True
 
