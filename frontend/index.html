@@ -1,0 +1,1535 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="KOCH ENVÍOS — Compramos, recibimos, enviamos y entregamos de Estados Unidos a Cuba.">
+<title>KOCH ENVÍOS | Estados Unidos a Cuba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#06265f;--blue:#0b4ea2;--sky:#eaf3ff;--red:#c9252d;
+  --green:#16834b;--gold:#f4b942;--text:#14213d;--muted:#667085;
+  --orange:#f28a1a;--orange-dark:#d96f0a;
+  --white:#fff;--bg:#f5f8fc;--shadow:0 8px 24px rgba(7,38,95,.07);
+}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:Arial, Georgia, Times, 'Times New Roman', serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+a{text-decoration:none;color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e6ebf2}
+.nav{height:88px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+}
+
+.logo img{
+  display:block;
+  width:auto;
+  height:62px;
+  max-width:240px;
+  object-fit:contain;
+}
+nav{display:flex;gap:25px;font-size:14px;font-weight:700;color:#344054}
+nav a:hover{color:var(--orange)}
+.nav-btn{display:flex;align-items:center;gap:6px;background:#25D366;color:#fff;padding:8px 14px;border-radius:12px;font-weight:800;font-size:13px;white-space:nowrap}
+.menu{display:none;background:none;border:0;font-size:25px;width:42px;height:42px;color:var(--navy);cursor:pointer}
+
+.hero{
+  color:white;position:relative;overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(2,23,58,.94),rgba(2,43,91,.76),rgba(2,23,58,.88)),
+    radial-gradient(circle at 75% 25%,#3873b7 0 8%,transparent 30%),
+    linear-gradient(135deg,#071f49,#0a4d93);
+}
+.hero:after{content:"✈";position:absolute;right:7%;top:12%;font-size:120px;opacity:.08;transform:rotate(-10deg)}
+.hero-inner{padding:52px 0 60px;text-align:center;position:relative;z-index:1}
+.eyebrow{display:inline-block;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:30px;font-size:13px;font-weight:800}
+.hero h1{font-size:clamp(38px,6vw,67px);margin:14px 0 5px;letter-spacing:-2px}
+.hero h1 span{color:#fff}
+.hero h2{font-size:clamp(20px,3vw,30px);margin:0 0 18px}
+.hero p{max-width:760px;margin:0 auto 27px;font-size:18px;color:#edf5ff}
+.shopping-message{
+  width:100%;
+  margin:22px auto 30px;
+  text-align:center;
+}
+
+.shopping-question{
+  font-size:clamp(20px,2.5vw,30px);
+  font-weight:700;
+  color:#f4f8ff;
+  margin-bottom:18px;
+}
+
+.store-list{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:0 auto 22px;
+}
+
+.store{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:45px;
+  padding:8px 16px;
+  border-radius:14px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  font-size:clamp(15px,1.5vw,20px);
+  font-weight:900;
+  letter-spacing:-.3px;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    box-shadow .25s ease;
+}
+
+.store:hover{
+  transform:translateY(-4px);
+  background:rgba(255,255,255,.18);
+  box-shadow:0 10px 25px rgba(0,0,0,.20);
+}
+
+/* Identidad visual de cada tienda */
+.store.amazon{color:#ff9900;text-shadow:0 1px 8px rgba(255,153,0,.25);}
+.store.shein{color:#ffffff;letter-spacing:3px;}
+.store.walmart{color:#69b7ff;}
+.store.ebay{color:#ffffff;}
+.store.ebay .ebay-e {color:#e53238;}
+.store.ebay .ebay-b {color:#0064d2;}
+.store.ebay .ebay-a {color:#f5af02;}
+.store.ebay .ebay-y {color:#86b817;}
+.store.temu{color:#ff7a3d;}
+.store.aliexpress{color:#ff7250;}
+.store.gymshark{color:#ffffff;letter-spacing:1.5px;}
+.store.more{color:#d7e7ff;font-weight:700;background:rgba(255,255,255,.06);}
+
+.shopping-answer{margin-top:8px;}
+.shopping-answer span{
+  display:inline-block;
+  padding:13px 25px;
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(255,255,255,.20),rgba(255,255,255,.07));
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 10px 30px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.15);
+  font-size:clamp(21px,2.8vw,32px);
+  font-weight:900;
+  color:#ffffff;
+}
+.hero-actions{
+  display:flex;
+  justify-content:center;
+  align-items:stretch;
+  flex-wrap:wrap;
+  gap:14px;
+  margin:10px auto 0;
+}
+
+.hero-button{
+  position:relative;
+  min-width:205px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  padding:15px 20px;
+  border-radius:18px;
+  color:#fff;
+  font-weight:900;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 10px 25px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.20);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+.hero-button::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,.22),transparent 45%);
+  pointer-events:none;
+}
+
+.hero-button:hover{
+  transform:translateY(-5px) scale(1.02);
+  box-shadow:0 16px 32px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.25);
+  filter:brightness(1.08);
+}
+
+.hero-button:active{transform:translateY(-1px) scale(.99);}
+
+.hero-button > span:last-child{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  line-height:1.1;
+}
+
+.hero-button small{font-size:10px;font-weight:700;opacity:.78;margin-bottom:4px;letter-spacing:.4px;}
+
+.button-icon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:rgba(255,255,255,.16);
+  font-size:20px;
+}
+.button-icon svg{
+  width:40px;
+  height:40px;
+  display:block;
+}
+
+.hero-button.register{background:linear-gradient(135deg,#55d655,#159947);}
+.hero-button.order{background:linear-gradient(135deg,#6675ed,#3544b8);}
+.hero-button.tracking{background:linear-gradient(135deg,#2f78bd,#164c87);}
+.cta{display:inline-flex;gap:10px;align-items:center;background:#fff;color:var(--navy);padding:14px 22px;border-radius:12px;font-weight:900;margin:4px}
+.cta.secondary{background:transparent;color:white;border:1px solid rgba(255,255,255,.5)}
+.hero-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px;text-align:left}
+.hero-card{
+  padding:19px;
+  border:1px solid rgba(255,255,255,.24);
+  background:rgba(0,20,55,.42);
+  backdrop-filter:blur(6px);
+  border-radius:15px;
+  transition:transform .3s ease, background .3s ease;
+}
+.hero-card:hover{transform:translateY(-3px);background:rgba(0,20,55,.60);}
+.hero-card .card-icon{display:block;font-size:24px;margin-bottom:6px;}
+.hero-card strong{display:block;font-size:16px;margin-bottom:4px}
+.hero-card span{font-size:13px;color:#d8e8ff}
+
+.brands{background:#fff;border-bottom:1px solid #e5eaf1}
+.brand-row{display:flex;justify-content:space-around;align-items:center;gap:25px;padding:24px 0;flex-wrap:wrap}
+.brand{font-size:20px;font-weight:900;color:#344054}
+.brand.amazon{color:#111}
+.brand.shein{letter-spacing:4px}
+.brand.walmart{color:#1671d9}
+.brand.temu{color:#f36a1d}
+.brand.aliexpress{color:#f25b22}
+.brand.gym{color:#111}
+
+section{padding:70px 0}
+.section-head{text-align:center;max-width:720px;margin:0 auto 34px}
+.section-head h2{font-size:32px;color:var(--navy);margin:0 0 7px;letter-spacing:-.7px}
+.section-head .section-icon{display:inline-block;font-size:28px;margin-bottom:4px;}
+.section-head p{margin:0;color:var(--muted)}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{
+  background:#fff;
+  border:1px solid #e5eaf1;
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:24px;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(7,38,95,.15);}
+.card .card-icon{display:block;font-size:32px;margin-bottom:8px;}
+.card h3{margin:0 0 15px;color:var(--navy)}
+.card p{color:var(--muted);font-size:14px}
+.price{font-size:38px;font-weight:950;color:var(--navy)}
+.price small{font-size:15px;color:var(--muted)}
+.list{padding:0;margin:0;list-style:none}
+.list li{padding:8px 0;border-bottom:1px solid #edf0f5;font-size:14px;display:flex;align-items:center;gap:8px;}
+.list li:last-child{border:0}
+.list .li-icon{display:inline-block;font-size:16px;}
+
+.highlight{background:linear-gradient(135deg,#eafff3,#f4fff8);border-color:#bce7cf}
+.warning{background:#fff9e9;border-color:#f1d58a}
+.electronics .price{color:var(--red);font-size:25px}
+.payment {
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:background .2s ease;
+}
+.payment:hover{background:#eef2f7;}
+
+.payment-flag {
+  width: 24px !important;
+  height: 16px !important;
+  min-width: 24px !important;
+  min-height: 16px !important;
+  max-width: 24px !important;
+  max-height: 16px !important;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.20);
+}
+
+.zelle-icon {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+  display: block;
+  flex-shrink: 0;
+}
+
+.payments{display:flex;flex-direction:column;gap:6px;}
+
+.tools{background:#fff}
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tool{background:#fff;border:1px solid #dfe6ef;border-radius:18px;box-shadow:var(--shadow);overflow:hidden;transition:transform .3s ease, box-shadow .3s ease}
+.tool:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(7,38,95,.12);}
+.tool-head{background:var(--navy);color:white;padding:15px 20px;font-weight:900;display:flex;align-items:center;gap:10px;}
+.tool-head .tool-icon{font-size:20px;}
+.tool-body{padding:24px}
+input,select{width:100%;padding:13px 14px;border:1px solid #cfd8e5;border-radius:10px;font:inherit;background:#fff;transition:border-color .3s ease, box-shadow .3s ease}
+input:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,78,162,.15);}
+label{display:block;font-size:13px;font-weight:800;margin:0 0 7px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn{width:100%;border:0;border-radius:10px;padding:13px 16px;background:var(--navy);color:#fff;font-weight:900;font:inherit;cursor:pointer;margin-top:15px;transition:background .3s ease, transform .2s ease}
+.btn:hover{background:var(--blue);transform:scale(1.01);}
+.btn:active{transform:scale(.98);}
+.result{margin-top:16px;background:var(--sky);padding:16px;border-radius:12px;display:none}
+.result strong{font-size:25px;color:var(--navy)}
+.status{display:flex;align-items:center;gap:10px;margin-top:18px}
+.dot{width:12px;height:12px;border-radius:50%;background:#20a464;box-shadow:0 0 0 5px #d9f7e8}
+.timeline{display:flex;justify-content:space-between;margin-top:24px;gap:4px}
+.step{text-align:center;font-size:11px;color:#667085;flex:1}
+.step-icon{width:42px;height:42px;border-radius:50%;background:#e8f0fb;color:var(--navy);display:grid;place-items:center;margin:0 auto 7px;font-size:18px;transition:all .3s ease}
+.step.active .step-icon{background:var(--navy);color:#fff;box-shadow:0 4px 15px rgba(6,38,95,.3);}
+.step.active{font-weight:800;color:var(--navy)}
+
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.timebox{background:#f2f6fb;border-radius:12px;text-align:center;padding:14px 5px;transition:all .3s ease}
+.timebox:hover{background:#e4ecf8;transform:scale(1.02);}
+.timebox b{display:block;font-size:30px;color:var(--navy)}
+.timebox span{font-size:11px;color:var(--muted);font-weight:800}
+.next-date{margin-top:16px;padding:13px;background:linear-gradient(135deg,#f8fafc,#eef4fa);border-radius:10px;text-align:center;font-size:14px;border:1px solid #dfe6ef;display:flex;align-items:center;justify-content:center;gap:8px;}
+
+.food{background:#f0fff5}
+.food-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.food-icons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.food-item{
+  background:#fff;
+  padding:17px;
+  text-align:center;
+  border-radius:13px;
+  border:1px solid #d6efdf;
+  font-weight:800;
+  font-size:13px;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.food-item:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(22,131,75,.12);}
+.food-item .food-icon{font-size:30px;display:block;margin-bottom:5px}
+
+.info{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.info-card{background:#fff;border-radius:16px;border:1px solid #e1e7ef;padding:25px;box-shadow:var(--shadow);transition:transform .3s ease, box-shadow .3s ease}
+.info-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(7,38,95,.10);}
+.info-card h3{color:var(--navy);margin-top:0;display:flex;align-items:center;gap:10px;}
+.info-card h3 .info-icon{font-size:24px;}
+.address{font-size:16px;background:#f8fafc;padding:16px;border-radius:10px;border:1px dashed #cfd8e5;}
+.contact-line{margin:11px 0;font-weight:700;display:flex;align-items:center;gap:10px;}
+.contact-line .contact-icon{font-size:18px;}
+.contact-line a{color:var(--blue);transition:color .2s ease;}
+.contact-line a:hover{color:var(--red);}
+.notice{margin-top:30px;background:linear-gradient(135deg,#fff0c7,#ffebae);border:1px solid #f0d27c;border-radius:12px;padding:16px;text-align:center;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;}
+.notice .notice-icon{font-size:20px;}
+
+footer{background:var(--navy);color:#fff;padding:38px 0}
+.footer-grid{display:flex;justify-content:space-between;gap:30px;align-items:center}
+footer p{margin:5px 0;color:#cfddf2;font-size:13px;display:flex;align-items:center;gap:6px;}
+footer .logo{color:#fff}
+.social{display:flex;gap:10px}
+.social a{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#173e79;
+  transition:background .3s ease, transform .3s ease;
+}
+.social a:hover{background:#1f4f96;transform:scale(1.08);}
+
+.floating{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:60;
+  background:#25D366;
+  color:#fff;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:27px;
+  box-shadow:0 8px 25px rgba(37,211,102,.35);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.floating:hover{transform:scale(1.08);box-shadow:0 12px 35px rgba(37,211,102,.5);}
+
+/* ===== v2: identidad azul/naranja, jerarquía y animaciones ===== */
+@keyframes heroIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-title-wrapper{animation:heroIn .7s ease both}
+.hero-actions{align-items:center;animation:heroIn .7s .2s ease both}
+.hero-logo{width:clamp(120px,17vw,160px);margin:0 auto 18px;background:#fff;border-radius:28px;padding:14px 16px;box-shadow:0 18px 40px rgba(0,0,0,.28),0 0 0 6px rgba(255,255,255,.12)}
+.hero-logo img{display:block;width:100%;height:auto}
+/* 3) jerarquía de botones: Crear Orden primario */
+.hero-button.order{order:0;min-width:260px;padding:19px 28px;font-size:17px;background:linear-gradient(135deg,#f9a23c,#e0600a);border-color:rgba(255,255,255,.4);box-shadow:0 14px 34px rgba(242,138,26,.45),inset 0 1px 0 rgba(255,255,255,.3)}
+.hero-button.register,.hero-button.tracking{min-width:180px;padding:12px 18px;font-size:14px;background:rgba(255,255,255,.12);box-shadow:0 6px 16px rgba(0,0,0,.14)}
+.hero-button.register small,.hero-button.tracking small{display:none}
+.hero-button.register .button-icon,.hero-button.tracking .button-icon{width:32px;height:32px}
+.hero-button.order .button-icon{background:rgba(255,255,255,.24)}
+/* 2) franja de confianza */
+.trust{background:#fff;border-bottom:1px solid #e5eaf1;box-shadow:0 8px 24px rgba(7,38,95,.05)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:22px 0}
+.trust-item{display:flex;align-items:center;gap:12px}
+.trust-item svg{width:34px;height:34px;flex:none;padding:7px;border-radius:12px;background:#fff4e6}
+.trust-item b{display:block;font-size:14px;color:var(--navy);line-height:1.2}
+.trust-item span{font-size:12px;color:var(--muted)}
+/* 4) acentos con los colores del logo */
+.section-head h2::after{content:"";display:block;width:52px;height:4px;border-radius:4px;margin:10px auto 0;background:linear-gradient(90deg,var(--blue),var(--orange))}
+.card:hover,.info-card:hover{border-color:rgba(242,138,26,.45)}
+.tool-head{background:linear-gradient(135deg,var(--navy),var(--blue))}
+.contact-line a:hover{color:var(--orange)}
+/* footer con logo */
+.footer-brand{display:inline-flex;align-items:center;gap:12px}
+.footer-logo{background:#fff;border-radius:14px;padding:6px 10px;display:grid;place-items:center}
+.footer-logo img{height:46px;max-width:none}
+.footer-name{font-family:'Metamorphous',cursive;font-size:26px;letter-spacing:1px;background:linear-gradient(135deg,#5aa7ff 0%,#8cc0ff 50%,#f4b942 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* 5) aparición al hacer scroll */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+/* 6) menú móvil */
+nav.open{display:flex;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:#fff;padding:8px 4%;border-bottom:1px solid #e6ebf2;box-shadow:0 14px 24px rgba(7,38,95,.10)}
+nav.open a{padding:14px 4px;border-bottom:1px solid #eef1f6;font-size:15px}
+nav.open a:last-child{border:0}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.hero-title-wrapper,.hero-actions{animation:none}}
+
+@media(max-width:850px){
+ nav{display:none}.menu{display:block}
+ .hero-cards,.grid-4{grid-template-columns:1fr 1fr}.tool-grid,.food-grid,.info{grid-template-columns:1fr}
+ .footer-grid{flex-direction:column;text-align:center}
+}
+@media(max-width:560px){
+ .nav{height:76px}.logo img{height:50px}
+ section{padding:50px 0}.hero-inner{padding:55px 0 45px}.hero-cards,.grid-4{grid-template-columns:1fr}
+ .hero h1{letter-spacing:-1px}.form-row{grid-template-columns:1fr}
+ .timeline{overflow-x:auto}.step{min-width:85px}.countdown{gap:6px}.timebox b{font-size:24px}
+ .brand-row{gap:14px}.brand{font-size:16px}
+ .shopping-message{margin-top:18px;}
+ .store-list{gap:7px;}
+ .store{min-height:40px;padding:7px 11px;border-radius:12px;font-size:14px;}
+ .shopping-answer span{padding:11px 17px;border-radius:15px;}
+ .hero-actions{flex-direction:column;width:100%;max-width:360px;}
+ .hero-button{width:100%;min-width:0;}
+}
+@media(max-width:850px){.nav-btn{margin-left:auto}.trust-grid{grid-template-columns:1fr 1fr;gap:16px}}
+@media(max-width:560px){
+ .nav-btn{padding:7px 10px;font-size:12px}
+ .floating{width:52px;height:52px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+ footer{padding-bottom:88px}
+ .footer-name{font-size:22px}
+ .hero-button.order{order:-1;min-width:0}
+ .trust-item svg{width:30px;height:30px}.trust-item b{font-size:13px}.trust-item span{font-size:11px}
+}
+@media(max-width:360px){.nav-btn svg{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="/" class="logo">
+    <img src="logo.png" alt="KOCH ENVÍOS">
+</a>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#tarifas">Tarifas</a>
+      <a href="/seguimiento/">Seguimiento</a>
+      <a href="/crear-orden/">Crear Orden</a>
+      <a href="#alimentos">Alimentos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="nav-btn" href="https://wa.me/5359307450" target="_blank">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  <span data-contacto="whatsapp">+53 59307450</span>
+</a>
+    <button class="menu" aria-label="Menú" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="container hero-inner">
+    <div class="hero-title-wrapper">
+  <div class="hero-logo"><img src="logo.png" alt="Logo KOCH ENVÍOS"></div>
+  <span class="eyebrow">De ESTADOS UNIDOS a CUBA</span>
+  <h1 style="
+    font-family: 'Metamorphous', cursive;
+    font-size: clamp(42px, 6vw, 72px);
+    background: linear-gradient(135deg, #6fb1ff 0%, #b5d6ff 45%, #f9a23c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 12px 0 8px 0;
+    letter-spacing: 1px;
+    filter: drop-shadow(0 2px 8px rgba(11,78,162,0.15));
+    display: block;
+    text-align: center;
+    width: 100%;
+  ">
+    KOCH ENVÍOS
+  </h1>
+  <div style="
+    width: 60%;
+    max-width: 280px;
+    height: 3px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, transparent, #f4b942, #f36a1d, #0b4ea2, transparent);
+    border-radius: 4px;
+  "></div>
+</div>    
+    <div class="shopping-message">
+  <div class="shopping-question">
+    ¿Quieres comprar en estas tiendas?
+  </div>
+
+<div class="store-list">
+  <a href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer" class="store amazon">Amazon</a>
+  <a href="https://us.shein.com/" target="_blank" rel="noopener noreferrer" class="store shein">SHEIN</a>
+  <a href="https://www.walmart.com/" target="_blank" rel="noopener noreferrer" class="store walmart">Walmart</a>
+  <a href="https://www.ebay.com/" target="_blank" rel="noopener noreferrer" class="store ebay"><span class="ebay-e">e</span><span class="ebay-b">b</span><span class="ebay-a">a</span><span class="ebay-y">y</span></a>
+  <a href="https://www.temu.com/" target="_blank" rel="noopener noreferrer" class="store temu">TEMU</a>
+  <a href="https://www.aliexpress.com/" target="_blank" rel="noopener noreferrer" class="store aliexpress">AliExpress</a>
+  <a href="https://www.gymshark.com/" target="_blank" rel="noopener noreferrer" class="store gymshark">GYMSHARK</a>
+  <span class="store more">y muchas más</span>
+</div>
+
+
+  <div class="shopping-answer">
+    <span>¡Nosotros nos encargamos de todo!</span>
+  </div>
+</div>
+<div class="hero-actions">
+
+  <a class="hero-button register" href="/registro/">
+    <span class="button-icon">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M5.5 20c.7-3.3 3.1-5.2 6.5-5.2s5.8 1.9 6.5 5.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+</span>
+    <span>
+      <small>¿Eres nuevo?</small>
+      REGÍSTRATE
+    </span>
+  </a>
+
+  <a class="hero-button order" href="/crear-orden/">
+    <span class="button-icon">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M8 7h8M8 11h5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M17 14v6M14 17h6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </svg>
+</span>
+    <span>
+      <small>¿Ya estás listo?</small>
+      CREAR ORDEN
+    </span>
+  </a>
+
+  <a class="hero-button tracking" href="/seguimiento/">
+    <span class="button-icon">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 7.5 12 4l8 3.5v9L12 20l-8-3.5z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M4 7.5 12 11l8-3.5M12 11v9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    <circle cx="17.5" cy="16.5" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <path d="m19.7 18.7 2 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </svg>
+</span>
+    <span>
+      <small>Consulta tu envío</small>
+      RASTREAR PAQUETE
+    </span>
+  </a>
+
+</div>
+    <div class="hero-cards">
+      <div class="hero-card">
+        <span class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d8e8ff" stroke-width="1.5">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 10h20"/>
+          </svg>
+        </span>
+        <strong>¿Tienes tarjeta?</strong>
+        <span>Envía tu compra a nuestra dirección de recepción en Florida.</span>
+      </div>
+      <div class="hero-card">
+        <span class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d8e8ff" stroke-width="1.5">
+            <rect x="3" y="7" width="18" height="12" rx="1"/>
+            <path d="M7 7V5a1 1 0 011-1h8a1 1 0 011 1v2"/>
+            <path d="M12 11v2"/>
+          </svg>
+        </span>
+        <strong>¿No tienes tarjeta?</strong>
+        <span>Nosotros compramos por ti al mismo precio de la tienda.</span>
+      </div>
+      <div class="hero-card">
+        <span class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d8e8ff" stroke-width="1.5">
+            <path d="M4 6h16v12H4z"/>
+            <path d="M8 6v12M16 6v12M4 10h16M4 14h16"/>
+          </svg>
+        </span>
+        <strong>De 2 a 3 envíos al mes</strong>
+        <span>Conectamos tus compras de Estados Unidos con Cuba.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust"><div class="container trust-grid">
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#f28a1a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><div><b>2 a 3 envíos al mes</b><span>Salidas frecuentes a Cuba</span></div></div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#f28a1a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>Seguimiento en línea</b><span>Consulta dónde está tu paquete</span></div></div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#f28a1a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8a3 3 0 016 0"/></svg><div><b>Compramos por ti</b><span>Al mismo precio de la tienda</span></div></div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#f28a1a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg><div><b>Entrega en Cuba</b><span>Rápido, seguro y confiable</span></div></div>
+</div></div>
+
+<div class="brands"><div class="container brand-row">
+  <span class="brand amazon">amazon</span><span class="brand shein">SHEIN</span><span class="brand walmart">Walmart</span>
+  <span class="brand ebay-brand"><span class="ebay-e">e</span><span class="ebay-b">b</span><span class="ebay-a">a</span><span class="ebay-y">y</span></span><span class="brand temu">TEMU</span><span class="brand aliexpress">AliExpress</span>
+  <span class="brand gym">GYMSHARK</span><span class="brand">y muchas más</span>
+</div></div>
+
+<section id="servicios">
+<div class="container">
+  <div class="section-head">
+    <span class="section-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2"/>
+      </svg>
+    </span>
+    <h2>Todo el proceso, en un solo lugar</h2>
+    <p>Compra online y deja que KOCH ENVÍOS se encargue del resto.</p>
+  </div>
+  <div class="grid-4">
+    <div class="card">
+      <span class="card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+          <path d="M16 3.13a4 4 0 010 7.75"/>
+          <path d="M21 21v-2a4 4 0 00-3-3.85"/>
+        </svg>
+      </span>
+      <h3>Compramos</h3>
+      <p>Si no tienes tarjeta, podemos realizar la compra por ti al precio de la tienda.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <path d="M8 4v2M16 4v2M3 9h18"/>
+        </svg>
+      </span>
+      <h3>Recibimos</h3>
+      <p>Recibimos tus paquetes en nuestra dirección de Florida y los identificamos para su envío.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </span>
+      <h3>Enviamos</h3>
+      <p>Realizamos envíos de Estados Unidos a Cuba 2 veces al mes.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+      </span>
+      <h3>Entregamos</h3>
+      <p>Te mantenemos informado durante el proceso hasta la entrega de tu paquete.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="tarifas">
+<div class="container">
+  <div class="section-head">
+    <span class="section-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8 10h8M8 14h5"/>
+      </svg>
+    </span>
+    <h2>Tarifas y métodos de pago</h2>
+    <p>Precios expresados en USD. Calcula tu estimado más abajo.</p>
+  </div>
+  <div class="grid-4">
+    <div class="card">
+      <span class="card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+          <rect x="3" y="6" width="18" height="12" rx="2"/>
+          <path d="M3 10h18"/>
+        </svg>
+      </span>
+      <h3>Costo de las libras</h3>
+      <div class="price" id="tarifaMenos50">$5.99<small>/lb</small></div>
+      <p>Paquetes de menos de 50 lb.</p>
+      <hr>
+      <div class="price" id="tarifaMas50">$4.99<small>/lb</small></div>
+      <p>Paquetes de más de 50 lb.</p>
+    </div>
+    <div class="card electronics">
+      <span class="card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9252d" stroke-width="1.8">
+          <rect x="4" y="7" width="16" height="10" rx="1"/>
+          <path d="M8 17v3M16 17v3M12 11v2"/>
+        </svg>
+      </span>
+      <h3>Electrónicos</h3>
+      <ul class="list">
+        <li><span class="li-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="2"><path d="M5 12h14"/></svg>
+        </span> Celulares <strong id="precioCelular">$50</strong></li>
+        <li><span class="li-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="2"><path d="M5 12h14"/></svg>
+        </span> iPad / Tablet <strong id="precioTablet">$55</strong></li>
+        <li><span class="li-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="2"><path d="M5 12h14"/></svg>
+        </span> Laptop <strong id="precioLaptop">$75</strong></li>
+      </ul>
+      <p>Estos artículos están sujetos a aranceles de la Aduana cubana.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+          <rect x="2" y="6" width="20" height="12" rx="1"/>
+          <path d="M6 10h4M6 14h8"/>
+        </svg>
+      </span>
+      <h3>Aceptamos</h3>
+
+      <div class="payments">
+
+        <div class="payment">
+          <svg class="payment-flag" viewBox="0 0 24 16" aria-label="Estados Unidos">
+            <rect width="24" height="16" fill="#fff"/>
+            <g><rect y="0.000" width="24" height="1.231" fill="#B22234"/><rect y="2.462" width="24" height="1.231" fill="#B22234"/><rect y="4.923" width="24" height="1.231" fill="#B22234"/><rect y="7.385" width="24" height="1.231" fill="#B22234"/><rect y="9.846" width="24" height="1.231" fill="#B22234"/><rect y="12.308" width="24" height="1.231" fill="#B22234"/><rect y="14.769" width="24" height="1.231" fill="#B22234"/></g>
+            <rect width="9.60" height="8.615" fill="#3C3B6E"/>
+            <g fill="#fff"><polygon points="0.80,0.31 0.92,0.69 1.32,0.69 1.00,0.93 1.12,1.31 0.80,1.07 0.48,1.31 0.60,0.93 0.28,0.69 0.68,0.69"/><polygon points="2.40,0.31 2.52,0.69 2.92,0.69 2.60,0.93 2.72,1.31 2.40,1.07 2.08,1.31 2.20,0.93 1.88,0.69 2.28,0.69"/><polygon points="4.00,0.31 4.12,0.69 4.52,0.69 4.20,0.93 4.32,1.31 4.00,1.07 3.68,1.31 3.80,0.93 3.48,0.69 3.88,0.69"/><polygon points="5.60,0.31 5.72,0.69 6.12,0.69 5.80,0.93 5.92,1.31 5.60,1.07 5.28,1.31 5.40,0.93 5.08,0.69 5.48,0.69"/><polygon points="7.20,0.31 7.32,0.69 7.72,0.69 7.40,0.93 7.52,1.31 7.20,1.07 6.88,1.31 7.00,0.93 6.68,0.69 7.08,0.69"/><polygon points="8.80,0.31 8.92,0.69 9.32,0.69 9.00,0.93 9.12,1.31 8.80,1.07 8.48,1.31 8.60,0.93 8.28,0.69 8.68,0.69"/><polygon points="1.60,1.17 1.72,1.55 2.12,1.55 1.80,1.79 1.92,2.17 1.60,1.93 1.28,2.17 1.40,1.79 1.08,1.55 1.48,1.55"/><polygon points="3.20,1.17 3.32,1.55 3.72,1.55 3.40,1.79 3.52,2.17 3.20,1.93 2.88,2.17 3.00,1.79 2.68,1.55 3.08,1.55"/><polygon points="4.80,1.17 4.92,1.55 5.32,1.55 5.00,1.79 5.12,2.17 4.80,1.93 4.48,2.17 4.60,1.79 4.28,1.55 4.68,1.55"/><polygon points="6.40,1.17 6.52,1.55 6.92,1.55 6.60,1.79 6.72,2.17 6.40,1.93 6.08,2.17 6.20,1.79 5.88,1.55 6.28,1.55"/><polygon points="8.00,1.17 8.12,1.55 8.52,1.55 8.20,1.79 8.32,2.17 8.00,1.93 7.68,2.17 7.80,1.79 7.48,1.55 7.88,1.55"/><polygon points="0.80,2.03 0.92,2.41 1.32,2.41 1.00,2.65 1.12,3.03 0.80,2.79 0.48,3.03 0.60,2.65 0.28,2.41 0.68,2.41"/><polygon points="2.40,2.03 2.52,2.41 2.92,2.41 2.60,2.65 2.72,3.03 2.40,2.79 2.08,3.03 2.20,2.65 1.88,2.41 2.28,2.41"/><polygon points="4.00,2.03 4.12,2.41 4.52,2.41 4.20,2.65 4.32,3.03 4.00,2.79 3.68,3.03 3.80,2.65 3.48,2.41 3.88,2.41"/><polygon points="5.60,2.03 5.72,2.41 6.12,2.41 5.80,2.65 5.92,3.03 5.60,2.79 5.28,3.03 5.40,2.65 5.08,2.41 5.48,2.41"/><polygon points="7.20,2.03 7.32,2.41 7.72,2.41 7.40,2.65 7.52,3.03 7.20,2.79 6.88,3.03 7.00,2.65 6.68,2.41 7.08,2.41"/><polygon points="8.80,2.03 8.92,2.41 9.32,2.41 9.00,2.65 9.12,3.03 8.80,2.79 8.48,3.03 8.60,2.65 8.28,2.41 8.68,2.41"/><polygon points="1.60,2.90 1.72,3.28 2.12,3.28 1.80,3.51 1.92,3.89 1.60,3.66 1.28,3.89 1.40,3.51 1.08,3.28 1.48,3.28"/><polygon points="3.20,2.90 3.32,3.28 3.72,3.28 3.40,3.51 3.52,3.89 3.20,3.66 2.88,3.89 3.00,3.51 2.68,3.28 3.08,3.28"/><polygon points="4.80,2.90 4.92,3.28 5.32,3.28 5.00,3.51 5.12,3.89 4.80,3.66 4.48,3.89 4.60,3.51 4.28,3.28 4.68,3.28"/><polygon points="6.40,2.90 6.52,3.28 6.92,3.28 6.60,3.51 6.72,3.89 6.40,3.66 6.08,3.89 6.20,3.51 5.88,3.28 6.28,3.28"/><polygon points="8.00,2.90 8.12,3.28 8.52,3.28 8.20,3.51 8.32,3.89 8.00,3.66 7.68,3.89 7.80,3.51 7.48,3.28 7.88,3.28"/><polygon points="0.80,3.76 0.92,4.14 1.32,4.14 1.00,4.37 1.12,4.75 0.80,4.52 0.48,4.75 0.60,4.37 0.28,4.14 0.68,4.14"/><polygon points="2.40,3.76 2.52,4.14 2.92,4.14 2.60,4.37 2.72,4.75 2.40,4.52 2.08,4.75 2.20,4.37 1.88,4.14 2.28,4.14"/><polygon points="4.00,3.76 4.12,4.14 4.52,4.14 4.20,4.37 4.32,4.75 4.00,4.52 3.68,4.75 3.80,4.37 3.48,4.14 3.88,4.14"/><polygon points="5.60,3.76 5.72,4.14 6.12,4.14 5.80,4.37 5.92,4.75 5.60,4.52 5.28,4.75 5.40,4.37 5.08,4.14 5.48,4.14"/><polygon points="7.20,3.76 7.32,4.14 7.72,4.14 7.40,4.37 7.52,4.75 7.20,4.52 6.88,4.75 7.00,4.37 6.68,4.14 7.08,4.14"/><polygon points="8.80,3.76 8.92,4.14 9.32,4.14 9.00,4.37 9.12,4.75 8.80,4.52 8.48,4.75 8.60,4.37 8.28,4.14 8.68,4.14"/><polygon points="1.60,4.62 1.72,5.00 2.12,5.00 1.80,5.23 1.92,5.61 1.60,5.38 1.28,5.61 1.40,5.23 1.08,5.00 1.48,5.00"/><polygon points="3.20,4.62 3.32,5.00 3.72,5.00 3.40,5.23 3.52,5.61 3.20,5.38 2.88,5.61 3.00,5.23 2.68,5.00 3.08,5.00"/><polygon points="4.80,4.62 4.92,5.00 5.32,5.00 5.00,5.23 5.12,5.61 4.80,5.38 4.48,5.61 4.60,5.23 4.28,5.00 4.68,5.00"/><polygon points="6.40,4.62 6.52,5.00 6.92,5.00 6.60,5.23 6.72,5.61 6.40,5.38 6.08,5.61 6.20,5.23 5.88,5.00 6.28,5.00"/><polygon points="8.00,4.62 8.12,5.00 8.52,5.00 8.20,5.23 8.32,5.61 8.00,5.38 7.68,5.61 7.80,5.23 7.48,5.00 7.88,5.00"/><polygon points="0.80,5.48 0.92,5.86 1.32,5.86 1.00,6.10 1.12,6.48 0.80,6.24 0.48,6.48 0.60,6.10 0.28,5.86 0.68,5.86"/><polygon points="2.40,5.48 2.52,5.86 2.92,5.86 2.60,6.10 2.72,6.48 2.40,6.24 2.08,6.48 2.20,6.10 1.88,5.86 2.28,5.86"/><polygon points="4.00,5.48 4.12,5.86 4.52,5.86 4.20,6.10 4.32,6.48 4.00,6.24 3.68,6.48 3.80,6.10 3.48,5.86 3.88,5.86"/><polygon points="5.60,5.48 5.72,5.86 6.12,5.86 5.80,6.10 5.92,6.48 5.60,6.24 5.28,6.48 5.40,6.10 5.08,5.86 5.48,5.86"/><polygon points="7.20,5.48 7.32,5.86 7.72,5.86 7.40,6.10 7.52,6.48 7.20,6.24 6.88,6.48 7.00,6.10 6.68,5.86 7.08,5.86"/><polygon points="8.80,5.48 8.92,5.86 9.32,5.86 9.00,6.10 9.12,6.48 8.80,6.24 8.48,6.48 8.60,6.10 8.28,5.86 8.68,5.86"/><polygon points="1.60,6.34 1.72,6.72 2.12,6.72 1.80,6.96 1.92,7.34 1.60,7.10 1.28,7.34 1.40,6.96 1.08,6.72 1.48,6.72"/><polygon points="3.20,6.34 3.32,6.72 3.72,6.72 3.40,6.96 3.52,7.34 3.20,7.10 2.88,7.34 3.00,6.96 2.68,6.72 3.08,6.72"/><polygon points="4.80,6.34 4.92,6.72 5.32,6.72 5.00,6.96 5.12,7.34 4.80,7.10 4.48,7.34 4.60,6.96 4.28,6.72 4.68,6.72"/><polygon points="6.40,6.34 6.52,6.72 6.92,6.72 6.60,6.96 6.72,7.34 6.40,7.10 6.08,7.34 6.20,6.96 5.88,6.72 6.28,6.72"/><polygon points="8.00,6.34 8.12,6.72 8.52,6.72 8.20,6.96 8.32,7.34 8.00,7.10 7.68,7.34 7.80,6.96 7.48,6.72 7.88,6.72"/><polygon points="0.80,7.20 0.92,7.58 1.32,7.58 1.00,7.82 1.12,8.20 0.80,7.96 0.48,8.20 0.60,7.82 0.28,7.58 0.68,7.58"/><polygon points="2.40,7.20 2.52,7.58 2.92,7.58 2.60,7.82 2.72,8.20 2.40,7.96 2.08,8.20 2.20,7.82 1.88,7.58 2.28,7.58"/><polygon points="4.00,7.20 4.12,7.58 4.52,7.58 4.20,7.82 4.32,8.20 4.00,7.96 3.68,8.20 3.80,7.82 3.48,7.58 3.88,7.58"/><polygon points="5.60,7.20 5.72,7.58 6.12,7.58 5.80,7.82 5.92,8.20 5.60,7.96 5.28,8.20 5.40,7.82 5.08,7.58 5.48,7.58"/><polygon points="7.20,7.20 7.32,7.58 7.72,7.58 7.40,7.82 7.52,8.20 7.20,7.96 6.88,8.20 7.00,7.82 6.68,7.58 7.08,7.58"/><polygon points="8.80,7.20 8.92,7.58 9.32,7.58 9.00,7.82 9.12,8.20 8.80,7.96 8.48,8.20 8.60,7.82 8.28,7.58 8.68,7.58"/></g>
+          </svg>
+          <span>USD</span>
+        </div>
+
+        <div class="payment">
+          <svg class="payment-flag" viewBox="0 0 24 16" aria-label="Unión Europea">
+            <rect width="24" height="16" fill="#003399"/>
+            <g fill="#FFCC00">
+              <circle cx="12" cy="3" r=".8"/>
+              <circle cx="16.5" cy="4.2" r=".8"/>
+              <circle cx="18" cy="8" r=".8"/>
+              <circle cx="16.5" cy="11.8" r=".8"/>
+              <circle cx="12" cy="13" r=".8"/>
+              <circle cx="7.5" cy="11.8" r=".8"/>
+              <circle cx="6" cy="8" r=".8"/>
+              <circle cx="7.5" cy="4.2" r=".8"/>
+            </g>
+          </svg>
+          <span>EUR</span>
+        </div>
+
+        <div class="payment zelle-payment">
+          <svg class="zelle-icon" viewBox="4 4 32 32" aria-label="Zelle">
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="#6d1ed4"/>
+            <path fill="#ffffff" d="M13 13h15v3l-9 8h9v3H13v-3l9-8h-9z"/>
+          </svg>
+          <span>Zelle</span>
+        </div>
+
+        <div class="payment">
+          <svg class="payment-flag" viewBox="0 0 24 16" aria-label="Cuba">
+            <rect width="24" height="16" fill="#fff"/>
+            <path fill="#0050A4" d="M0 0h24v3.2H0zm0 6.4h24v3.2H0zm0 6.4h24V16H0z"/>
+            <path fill="#CF142B" d="M0 0l10 8L0 16z"/>
+            <polygon fill="#fff" points="3.1,6.2 3.8,7.3 5.1,7.3 4.1,8.1 4.5,9.3 3.1,8.6 2,9.3 2.4,8.1 1.4,7.3 2.7,7.3"/>
+          </svg>
+          <span>CUP</span>
+        </div>
+
+        <div class="payment">
+          <svg class="payment-flag" viewBox="0 0 24 16" aria-label="Jamaica">
+            <rect width="24" height="16" fill="#009B3A"/>
+            <path fill="#FED100" d="M0 0h3l21 14v2h-3L0 2zM21 0h3v2L3 16H0v-2z"/>
+            <path fill="#000" d="M0 0h3l9 6 9-6h3v2l-9 6 9 6v2h-3l-9-6-9 6H0v-2l9-6-9-6z"/>
+          </svg>
+          <span>JMD</span>
+        </div>
+
+        <div class="payment">
+          <svg class="payment-flag" viewBox="0 0 24 16" aria-label="Sudáfrica">
+            <rect width="24" height="8" fill="#E03C31"/>
+            <rect y="8" width="24" height="8" fill="#001489"/>
+            <polygon fill="#FFFFFF" points="0.00,-3.77 9.10,5.33 25.00,5.33 25.00,10.67 9.10,10.67 0.00,19.77 0.00,12.23 4.23,8.00 0.00,3.77"/>
+            <polygon fill="#FFB81C" points="0.00,2.26 5.74,8.00 0.00,13.74"/>
+            <polygon fill="#000000" points="0.00,3.77 4.23,8.00 0.00,12.23"/>
+            <polygon fill="#007749" points="0.00,-2.26 8.66,6.40 25.00,6.40 25.00,9.60 8.66,9.60 0.00,18.26 0.00,13.74 5.74,8.00 0.00,2.26"/>
+          </svg>
+          <span>RANDS</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card warning">
+      <span class="card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9252d" stroke-width="1.8">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M12 8v4M12 16h.01"/>
+        </svg>
+      </span>
+      <h3>Importante</h3>
+      <p><strong>No mezcle alimentos, medicamentos o productos de aseo con ropa o calzado.</strong></p>
+      <p>Los paquetes mezclados se cobran a <strong id="tarifaMixtoTexto">$6 por libra</strong>.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="proximos-envios">
+<div class="tool" style="max-width:500px;margin:0 auto;">
+  <div class="tool-head">
+    <span class="tool-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </span>
+    PRÓXIMOS ENVÍOS
+  </div>
+  <div class="tool-body" style="padding:16px;">
+    <p style="font-size:13px;margin-bottom:12px;">Próxima salida programada:</p>
+    <div class="countdown" style="gap:6px;">
+      <div class="timebox" style="padding:8px 5px;">
+        <b style="font-size:22px;" id="days">00</b>
+        <span style="font-size:10px;">DÍAS</span>
+      </div>
+      <div class="timebox" style="padding:8px 5px;">
+        <b style="font-size:22px;" id="hours">00</b>
+        <span style="font-size:10px;">HORAS</span>
+      </div>
+      <div class="timebox" style="padding:8px 5px;">
+        <b style="font-size:22px;" id="minutes">00</b>
+        <span style="font-size:10px;">MINUTOS</span>
+      </div>
+      <div class="timebox" style="padding:8px 5px;">
+        <b style="font-size:22px;" id="seconds">00</b>
+        <span style="font-size:10px;">SEGUNDOS</span>
+      </div>
+    </div>
+    <div class="next-date" id="proximoEnvioFecha" style="margin-top:10px;padding:8px;font-size:12px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <path d="M3 10h18M8 2v4M16 2v4"/>
+      </svg>
+      Próximo envío: <strong id="fechaTexto">Cargando...</strong>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="tool-grid">
+    <div class="tool">
+      <div class="tool-head">
+        <span class="tool-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+            <rect x="3" y="6" width="18" height="12" rx="2"/>
+            <path d="M3 10h18"/>
+          </svg>
+        </span>
+        CALCULA EL COSTO DE TU ENVÍO
+      </div>
+      <div class="tool-body">
+        <div class="form-row">
+          <div><label for="weight">Peso (libras)</label><input id="weight" type="number" min="0" step=".1" placeholder="Ej. 25"></div>
+          <div><label for="packageType">Tipo de paquete</label><select id="packageType"><option value="standard">Ropa / Calzado / Misceláneos</option><option value="food">Alimentos separados</option><option value="mixed">Paquete mezclado</option></select></div>
+        </div>
+        <button class="btn" onclick="calculate()">Calcular estimado</button>
+        <div id="calcResult" class="result"></div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <span class="tool-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+            <path d="M4 4h16v16H4z"/>
+            <path d="M8 8h8v8H8z"/>
+          </svg>
+        </span>
+        ANTES DE COMPRAR
+      </div>
+      <div class="tool-body">
+        <p><strong>Contáctanos antes de realizar cualquier compra.</strong></p>
+        <ul class="list">
+          <li>
+            <span class="li-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </span>
+            1. Escríbenos y confirma disponibilidad.
+          </li>
+          <li>
+            <span class="li-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </span>
+            2. Recibe instrucciones para tu compra.
+          </li>
+          <li>
+            <span class="li-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </span>
+            3. Usa nuestro número de seguimiento.
+          </li>
+          <li>
+            <span class="li-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </span>
+            4. Conserva tu comprobante de envío.
+          </li>
+        </ul>
+        <a class="btn" style="display:block;text-align:center;margin-bottom:10px" href="/crear-orden/"> Crear Orden</a>
+        <a class="btn" style="display:block;text-align:center" href="https://wa.me/5359307450?text=Hola%20KOCH%20ENVÍOS,%20quiero%20realizar%20una%20compra." target="_blank"> Contactar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="food" id="alimentos">
+<div class="container">
+  <div class="food-grid">
+    <div>
+      <div class="section-head" style="text-align:left;margin:0 0 18px">
+        <span class="section-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </span>
+        <h2>Envío de alimentos</h2>
+        <p>También podemos transportar alimentos no perecederos.</p>
+      </div>
+      <p>Ejemplos: enlatados, cereales, snacks, café y otros productos permitidos.</p>
+      <div class="card highlight">
+        <span class="card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16834b" stroke-width="1.8">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 8v4M12 16h.01"/>
+          </svg>
+        </span>
+        <strong>Regla importante</strong>
+        <p style="margin-bottom:0">Los alimentos deben enviarse <strong>por separado</strong>. No los mezcles con ropa, calzado o productos de aseo.</p>
+      </div>
+    </div>
+    <div class="food-icons">
+      <div class="food-item">
+        <span class="food-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16834b" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 12h8"/>
+          </svg>
+        </span>
+        Enlatados
+      </div>
+      <div class="food-item">
+        <span class="food-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16834b" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+        </span>
+        Cereales
+      </div>
+      <div class="food-item">
+        <span class="food-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16834b" stroke-width="1.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+          </svg>
+        </span>
+        Snacks
+      </div>
+      <div class="food-item">
+        <span class="food-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16834b" stroke-width="1.5">
+            <path d="M18 8h1a4 4 0 010 8h-1"/>
+            <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
+            <path d="M6 1v3M10 1v3M14 1v3"/>
+          </svg>
+        </span>
+        Café
+      </div>
+      <div class="food-item">
+        <span class="food-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16834b" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+          </svg>
+        </span>
+        Galletas
+      </div>
+      <div class="food-item">
+        <span class="food-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16834b" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <path d="M8 4v2M16 4v2M3 9h18"/>
+          </svg>
+        </span>
+        Otros permitidos
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="contacto">
+<div class="container">
+  <div class="section-head">
+    <span class="section-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+    </span>
+    <h2>Recibimos tus compras</h2>
+    <p>Utiliza esta dirección únicamente después de confirmar el proceso con KOCH ENVÍOS.</p>
+  </div>
+  <div class="info">
+    <div class="info-card">
+      <h3>
+        <span class="info-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </span>
+        Dirección de recepción en Florida
+      </h3>
+      <div class="address" id="direccionRecepcion"><strong>8417 N Armenia Ave, Apto 827</strong><br>Tampa, Florida 33604-2691<br>Estados Unidos</div>
+      <div class="contact-line">
+        <span class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="1.8">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </span>
+        <a href="tel:+18132556899" data-contacto="telefono_usa">+1 (813) 255-6899</a>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>
+        <span class="info-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06265f" stroke-width="1.8">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </span>
+        Contáctanos
+      </h3>
+      <div class="contact-line">
+        <span class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="1.8">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </span>
+        <a href="tel:+5359307450" data-contacto="telefono_cuba">+53 59307450</a>
+      </div>
+      <div class="contact-line">
+        <span class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="1.8">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </span>
+        <a href="tel:+18132556899" data-contacto="telefono_usa">+1 (813) 255-6899</a>
+      </div>
+      <div class="contact-line">
+        <span class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0b4ea2" stroke-width="1.8">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </span>
+        <a href="mailto:kochenvios@gmail.com" data-contacto="email">kochenvios@gmail.com</a>
+      </div>
+      <p><small>Respondemos en menos de 24 horas</small></p>
+    </div>
+  </div>
+  <div class="notice">
+    <span class="notice-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9252d" stroke-width="1.8">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <path d="M12 8v4M12 16h.01"/>
+      </svg>
+    </span>
+    Antes de realizar cualquier compra, contáctanos para ayudarte con el proceso y garantizar el seguimiento de tu paquete correctamente.
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-grid">
+  <div>
+    <a href="#inicio" class="logo footer-brand"><span class="footer-logo"><img src="logo.png" alt="KOCH ENVÍOS"></span><span class="footer-name">KOCH ENVÍOS</span></a>
+    <p>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#cfddf2" stroke-width="1.8">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+      Rápido, Seguro y Confiable
+    </p>
+    <p>Tu mejor conexión entre Estados Unidos y Cuba.</p>
+  </div>
+  <div class="social">
+    <a href="https://wa.me/5359307450" target="_blank" aria-label="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </a>
+    <!-- FACEBOOK oculto temporalmente: descomenta cuando exista la página
+    <a href="#" aria-label="Facebook">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    </a>
+    -->
+    <a href="https://www.instagram.com/koch_envios?stkn=ZTVvMTQ5MmdnMDU0&utm_source=qr" target="_blank" aria-label="Instagram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+    </a>
+  </div>
+  <p>© 2026 KOCH ENVÍOS. Información sujeta a cambios.</p>
+</div>
+</footer>
+
+<a class="floating" href="https://wa.me/5359307450?text=Hola%20KOCH%20ENVÍOS,%20necesito%20información%20sobre%20los%20envíos." target="_blank" aria-label="WhatsApp">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+const trackingData={
+  "KCH123456":{status:"En tránsito a Cuba",date:"25/08/2026",step:1},
+  "KCH2026001":{status:"Recibido en Florida",date:"24/08/2026",step:0},
+  "KCH2026002":{status:"En Aduana",date:"22/08/2026",step:3},
+  "KCH2026003":{status:"En reparto",date:"20/08/2026",step:4},
+  "KCH2026004":{status:"Entregado",date:"19/08/2026",step:5},
+};
+async function trackPackage() {
+    const code = document.getElementById("trackingInput").value.trim().toUpperCase();
+    const box = document.getElementById("trackingResult");
+    
+    if (!code) {
+        box.style.display = "block";
+        box.innerHTML = " Introduce un número de seguimiento.";
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/tracking/buscar/?tracking_id=${code}`);
+        const data = await response.json();
+        
+        if (response.ok && !data.error) {
+            box.style.display = "block";
+            
+            const estadoMap = {
+                'recibida': 'Orden recibida ✅',
+                'revision': 'En revisión 🔍',
+                'info_requerida': 'Información requerida ℹ️',
+                'confirmada': 'Confirmada ✅',
+                'pago_pendiente': 'Pago pendiente 💳',
+                'pago_recibido': 'Pago recibido 💰',
+                'preparando': 'Preparando envío 📦',
+                'transito': 'En tránsito ✈️',
+                'cuba': 'Llega a Cuba 🏝️',
+                'disponible': 'Disponible para entrega 📬',
+                'entregada': 'Entregada 🎉',
+                'cancelada': 'Cancelada ❌'
+            };
+            
+            const estados = ['recibida', 'transito', 'cuba', 'disponible', 'entregada'];
+            let stepIndex = estados.indexOf(data.estado);
+            if (stepIndex === -1) stepIndex = 0;
+            
+            const pasos = ['📥 Recibido', '✈️ Tránsito', '🏝️ Cuba', '🚚 Reparto', '✅ Entregado'];
+            let timelineHTML = '';
+            pasos.forEach((paso, index) => {
+                const active = index <= stepIndex ? 'active' : '';
+                const icon = paso.split(' ')[0];
+                const label = paso.split(' ').slice(1).join(' ');
+                timelineHTML += `
+                    <div class="step ${active}">
+                        <div class="step-icon">${icon}</div>
+                        ${label}
+                    </div>
+                `;
+            });
+            
+            box.innerHTML = `
+                <strong>${estadoMap[data.estado] || data.estado}</strong>
+                <br><small>Seguimiento: ${data.tracking_id} · Cliente: ${data.cliente_customer_number}</small>
+                <div class="timeline">${timelineHTML}</div>
+            `;
+        } else {
+            box.style.display = "block";
+            box.innerHTML = `❌ ${data.error || 'No se encontró la orden'}`;
+        }
+    } catch (error) {
+        box.style.display = "block";
+        box.innerHTML = `⚠️ Error al conectar con el servidor.`;
+    }
+}
+// Configuración de precios obtenida desde Django
+let configuracion = {
+    tarifa_menos_50: 5.99,
+    tarifa_mas_50: 4.99,
+    tarifa_mixto: 6,
+    precio_celular: 50,
+    precio_tablet: 55,
+    precio_laptop: 75
+};
+
+function calculate(){
+
+    const weight = parseFloat(document.getElementById("weight").value);
+    const type = document.getElementById("packageType").value;
+    const box = document.getElementById("calcResult");
+
+    if(!weight || weight <= 0){
+        box.style.display = "block";
+        box.innerHTML = "⚠️ Introduce un peso válido.";
+        return;
+    }
+
+    let rate = weight > 50
+        ? configuracion.tarifa_mas_50
+        : configuracion.tarifa_menos_50;
+
+    // Los paquetes mezclados usan su propia tarifa (se cambia desde el panel)
+    if(type === "mixed"){
+        rate = configuracion.tarifa_mixto;
+    }
+
+    const cost = weight * rate;
+
+    let note = type === "mixed"
+        ? `Paquete mezclado: se aplica $${rate.toFixed(2)}/lb.`
+        : `Tarifa aplicada: $${rate.toFixed(2)}/lb.`;
+
+    box.style.display = "block";
+
+    box.innerHTML = `💰 Costo estimado: <strong>$${cost.toFixed(2)} USD</strong><br><small>${note} El precio final puede variar según el contenido y las condiciones del envío.</small>`;
+}
+// Registrar cliente
+async function registrarCliente(event) {
+    event.preventDefault();
+    
+    const datos = {
+        nombre: document.getElementById('reg_nombre').value,
+        apellidos: document.getElementById('reg_apellidos').value,
+        telefono: document.getElementById('reg_telefono').value,
+        email: document.getElementById('reg_email').value,
+        direccion: document.getElementById('reg_direccion').value,
+        ciudad: document.getElementById('reg_ciudad').value,
+        provincia: document.getElementById('reg_provincia').value,
+        whatsapp: document.getElementById('reg_whatsapp').value || '',
+    };
+    
+    const box = document.getElementById('registroResult');
+    box.style.display = 'block';
+    
+    try {
+        const response = await fetch('/api/clientes/registrar/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datos)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            box.innerHTML = `
+               ✅ <strong>¡Registro exitoso!</strong><br>
+                Customer Number: <strong>${data.customer_number}</strong><br>
+                Nombre: ${data.cliente.nombre} ${data.cliente.apellidos}<br>
+                <small>Guarda tu Customer Number para futuros envíos.</small>
+            `;
+            document.getElementById('registroForm').reset();
+        } else {
+            box.innerHTML = `❌ ${data.error || 'Error al registrar'}`;
+        }
+    } catch (error) {
+        box.innerHTML = `⚠️ Error de conexión.`;
+    }
+}
+
+// Crear orden
+async function crearOrden(event) {
+    event.preventDefault();
+    
+    const datos = {
+        cliente_id: parseInt(document.getElementById('ord_cliente_id').value),
+        producto: document.getElementById('ord_producto').value,
+        cantidad: parseInt(document.getElementById('ord_cantidad').value),
+        peso: parseFloat(document.getElementById('ord_peso').value) || null,
+    };
+    
+    const box = document.getElementById('ordenResult');
+    box.style.display = 'block';
+    
+    try {
+        const response = await fetch('/api/ordenes/crear_orden/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datos)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            box.innerHTML = `
+                ✅ <strong>¡Orden creada!</strong><br>
+                Tracking ID: <strong>${data.tracking_id}</strong><br>
+                Producto: ${data.orden.producto}<br>
+                Estado: ${data.orden.estado}<br>
+                <small>Usa este Tracking ID para rastrear tu paquete.</small>
+            `;
+            document.getElementById('ordenForm').reset();
+        } else {
+            box.innerHTML = `❌ ${data.error || 'Error al crear orden'}`;
+        }
+    } catch (error) {
+        box.innerHTML = `⚠️ Error de conexión.`;
+    }
+}
+let shipmentDate;
+
+function aplicarContacto(c) {
+    if (!c) return;
+
+    // Correo
+    if (c.email) {
+        document.querySelectorAll('[data-contacto="email"]').forEach(function (el) {
+            el.href = 'mailto:' + c.email;
+            el.textContent = c.email;
+        });
+    }
+
+    // Teléfonos de Estados Unidos y Cuba
+    ['telefono_usa', 'telefono_cuba'].forEach(function (campo) {
+        if (!c[campo]) return;
+        const digitos = c[campo].replace(/\D/g, '');
+        const tel = c[campo].trim().startsWith('+') ? '+' + digitos : digitos;
+        document.querySelectorAll('[data-contacto="' + campo + '"]').forEach(function (el) {
+            el.href = 'tel:' + tel;
+            el.textContent = c[campo];
+        });
+    });
+
+    // WhatsApp: todos los enlaces wa.me conservan su mensaje y cambian de número
+    if (c.whatsapp) {
+        const digitos = c.whatsapp.replace(/\D/g, '');
+        document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function (el) {
+            const resto = el.getAttribute('href').replace(/^https:\/\/wa\.me\/\d*/, '');
+            el.setAttribute('href', 'https://wa.me/' + digitos + resto);
+        });
+        document.querySelectorAll('[data-contacto="whatsapp"]').forEach(function (el) {
+            el.textContent = c.whatsapp;
+        });
+    }
+
+    // Dirección de recepción (la primera línea en negrita)
+    if (c.direccion) {
+        const caja = document.getElementById('direccionRecepcion');
+        if (caja) {
+            caja.textContent = '';
+            c.direccion.split(/\r?\n/).filter(function (l) { return l.trim(); }).forEach(function (linea, i) {
+                if (i === 0) {
+                    const negrita = document.createElement('strong');
+                    negrita.textContent = linea.trim();
+                    caja.appendChild(negrita);
+                } else {
+                    caja.appendChild(document.createElement('br'));
+                    caja.appendChild(document.createTextNode(linea.trim()));
+                }
+            });
+        }
+    }
+}
+
+async function obtenerFechaEnvio() {
+    try {
+        const response = await fetch('/api/configuracion/');
+        const data = await response.json();
+
+        // Cargar precios desde Django
+        configuracion.tarifa_menos_50 = parseFloat(data.tarifa_menos_50);
+        configuracion.tarifa_mas_50 = parseFloat(data.tarifa_mas_50);
+        configuracion.precio_celular = parseFloat(data.precio_celular);
+        configuracion.precio_tablet = parseFloat(data.precio_tablet);
+        configuracion.precio_laptop = parseFloat(data.precio_laptop);
+        if (data.tarifa_mixto) {
+            configuracion.tarifa_mixto = parseFloat(data.tarifa_mixto);
+        }
+
+        // Actualizar precios visibles en la página
+        document.getElementById('tarifaMenos50').innerHTML =
+            `$${configuracion.tarifa_menos_50.toFixed(2)}<small>/lb</small>`;
+
+        document.getElementById('tarifaMas50').innerHTML =
+            `$${configuracion.tarifa_mas_50.toFixed(2)}<small>/lb</small>`;
+
+        document.getElementById('precioCelular').textContent =
+            `$${configuracion.precio_celular.toFixed(2)}`;
+
+        document.getElementById('precioTablet').textContent =
+            `$${configuracion.precio_tablet.toFixed(2)}`;
+
+        document.getElementById('precioLaptop').textContent =
+            `$${configuracion.precio_laptop.toFixed(2)}`;
+
+        document.getElementById('tarifaMixtoTexto').textContent =
+            `$${configuracion.tarifa_mixto.toFixed(2)} por libra`;
+
+        // Correo, teléfonos, WhatsApp y dirección que se editan desde el panel
+        aplicarContacto(data.contacto);
+
+        if (!data.proximo_envio) {
+            document.getElementById('fechaTexto').textContent = 'Por confirmar';
+            return 0;
+        }
+
+        const fechaObj = new Date(data.proximo_envio);
+        const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        const dia = String(fechaObj.getDate()).padStart(2, '0');
+        const mes = meses[fechaObj.getMonth()];
+        const anio = fechaObj.getFullYear();
+
+        document.getElementById('fechaTexto').textContent = `${dia}-${mes}-${anio}`;
+
+        return fechaObj.getTime();
+
+    } catch (error) {
+        const fechaDefault = new Date("2026-09-01T12:00:00-04:00");
+        const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        const dia = String(fechaDefault.getDate()).padStart(2, '0');
+        const mes = meses[fechaDefault.getMonth()];
+        const anio = fechaDefault.getFullYear();
+
+        document.getElementById('fechaTexto').textContent = `${dia}-${mes}-${anio}`;
+
+        return fechaDefault.getTime();
+    }
+}
+
+async function iniciarContador() {
+    shipmentDate = await obtenerFechaEnvio();
+    countdown();
+    setInterval(countdown, 1000);
+}
+
+function countdown() {
+    let diff = Math.max(0, shipmentDate - Date.now());
+    const d = Math.floor(diff / 86400000);
+    diff %= 86400000;
+    const h = Math.floor(diff / 3600000);
+    diff %= 3600000;
+    const m = Math.floor(diff / 60000);
+    diff %= 60000;
+    const s = Math.floor(diff / 1000);
+    document.getElementById("days").textContent = String(d).padStart(2, "0");
+    document.getElementById("hours").textContent = String(h).padStart(2, "0");
+    document.getElementById("minutes").textContent = String(m).padStart(2, "0");
+    document.getElementById("seconds").textContent = String(s).padStart(2, "0");
+}
+
+iniciarContador();
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker
+            .register("/sw.js")
+            .then(function (registro) {
+                console.log("Service Worker registrado:", registro.scope);
+            })
+            .catch(function (error) {
+                console.error("Error registrando Service Worker:", error);
+            });
+    });
+}
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('header nav'),btn=document.querySelector('.menu');
+  if(btn&&nav){
+    var setMenu=function(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o);btn.textContent=o?'✕':'☰';};
+    btn.addEventListener('click',function(){setMenu(!nav.classList.contains('open'));});
+    nav.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false);});
+    window.addEventListener('resize',function(){if(window.innerWidth>850)setMenu(false);});
+  }
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var io=new IntersectionObserver(function(list){list.forEach(function(en){
+    if(!en.isIntersecting)return;var el=en.target;io.unobserve(el);
+    requestAnimationFrame(function(){el.classList.add('in');});
+    setTimeout(function(){el.classList.remove('reveal','in');el.style.transitionDelay='';},900);
+  });},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.section-head,.card,.tool,.hero-card,.info-card,.food-item,.trust-item').forEach(function(el,i){
+    el.classList.add('reveal');el.style.transitionDelay=((i%4)*70)+'ms';io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>

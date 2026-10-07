@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plantillas de correo - KOCH ENVÍOS</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        h1 { margin: 0; color: #123b73; }
+
+        .boton-volver {
+            text-decoration: none;
+            background: #123b73;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .tarjeta h2 {
+            margin: 0 0 6px 0;
+            color: #123b73;
+            font-size: 20px;
+        }
+
+        .ayuda { color: #6b7280; font-size: 14px; margin: 0 0 15px 0; }
+
+        .variables code {
+            display: inline-block;
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin: 2px 2px;
+            font-size: 13px;
+        }
+
+        label.campo {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 14px 0 6px 0;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        textarea { min-height: 200px; resize: vertical; line-height: 1.5; }
+
+        .activa {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            font-size: 14px;
+        }
+
+        .activa input { width: 18px; height: 18px; }
+
+        .botones { display: flex; justify-content: flex-end; margin-top: 10px; }
+
+        .boton-guardar {
+            border: none;
+            background: #0d6efd;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .boton-guardar:hover { background: #0b5ed7; }
+
+        .mensaje {
+            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #e8f5e9;
+            color: #166534;
+        }
+
+        @media (max-width: 600px) {
+            .contenedor { margin: 20px auto; padding: 15px; }
+            .encabezado { flex-direction: column; align-items: flex-start; gap: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="contenedor">
+
+    <div class="encabezado">
+        <h1>✉️ Plantillas de correo</h1>
+        <a href="{% url 'configuracion_operaciones' %}" class="boton-volver">← Configuración</a>
+    </div>
+
+    {% if guardado %}
+        <div class="mensaje">✅ Plantillas guardadas correctamente.</div>
+    {% endif %}
+
+    <div class="tarjeta variables">
+        <h2>Variables disponibles</h2>
+        <p class="ayuda">
+            Escríbelas entre llaves dentro del asunto o del texto y se reemplazan
+            por los datos reales al enviar el correo. Ejemplo: Hola {nombre}.
+        </p>
+        {% for v in variables %}<code>{{ "{" }}{{ v }}{{ "}" }}</code>{% endfor %}
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for p in plantillas %}
+        <div class="tarjeta">
+            <h2>{{ p.get_evento_display }}</h2>
+            <p class="ayuda">{{ p.descripcion }}</p>
+
+            <label class="campo" for="asunto_{{ p.evento }}">Asunto</label>
+            <input type="text" id="asunto_{{ p.evento }}" name="asunto_{{ p.evento }}"
+                   value="{{ p.asunto }}" maxlength="200" required>
+
+            <label class="campo" for="cuerpo_{{ p.evento }}">Texto del correo</label>
+            <textarea id="cuerpo_{{ p.evento }}" name="cuerpo_{{ p.evento }}" required>{{ p.cuerpo }}</textarea>
+
+            <label class="activa">
+                <input type="checkbox" name="activa_{{ p.evento }}" {% if p.activa %}checked{% endif %}>
+                Enviar este correo
+            </label>
+        </div>
+        {% endfor %}
+
+        <div class="botones">
+            <button type="submit" class="boton-guardar">💾 Guardar plantillas</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

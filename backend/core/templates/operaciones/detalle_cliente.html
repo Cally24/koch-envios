@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Cliente {{ cliente.customer_number }} - KOCH ENVÍOS
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        h1,
+        h2 {
+            margin-top: 0;
+        }
+
+        .numero {
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .datos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .dato {
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .etiqueta {
+            display: block;
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .valor {
+            font-weight: 500;
+        }
+
+        .tabla-contenedor {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #f9fafb;
+            font-size: 14px;
+        }
+
+        .tracking {
+            color: #2563eb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .estado {
+            font-weight: bold;
+        }
+
+        .botones {
+            margin-top: 20px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 10px 16px;
+            background: #1f2937;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .datos {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <div class="tarjeta">
+
+        <div class="numero">
+            Cliente #{{ cliente.customer_number }}
+        </div>
+
+        <h1>
+            {{ cliente.nombre }}
+            {{ cliente.apellidos }}
+        </h1>
+
+        <div class="datos">
+
+            <div class="dato">
+                <span class="etiqueta">Teléfono</span>
+                <span class="valor">{{ cliente.telefono|default:"—" }}</span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">WhatsApp</span>
+                <span class="valor">{{ cliente.whatsapp|default:"—" }}</span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Email</span>
+                <span class="valor">{{ cliente.email|default:"—" }}</span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Dirección</span>
+                <span class="valor">{{ cliente.direccion|default:"—" }}</span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Ciudad</span>
+                <span class="valor">{{ cliente.ciudad|default:"—" }}</span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Provincia</span>
+                <span class="valor">{{ cliente.provincia|default:"—" }}</span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Dirección de entrega</span>
+                <span class="valor">{{ cliente.direccion_entrega|default:"—" }}</span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Instrucciones de entrega</span>
+                <span class="valor">{{ cliente.instrucciones_entrega|default:"—" }}</span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Estado del cliente</span>
+                <span class="valor">
+                    {% if cliente.activo %}
+                        Activo
+                    {% else %}
+                        Inactivo
+                    {% endif %}
+                </span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Fecha de registro</span>
+                <span class="valor">
+                    {{ cliente.fecha_registro|date:"d/m/Y H:i" }}
+                </span>
+            </div>
+
+        </div>
+
+        <div class="botones">
+
+            <a
+                href="{% url 'lista_clientes' %}"
+                class="boton"
+            >
+                ← Lista de clientes
+            </a>
+
+            <a
+                href="{% url 'panel_operaciones' %}"
+                class="boton"
+            >
+                Panel de operaciones
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="tarjeta">
+
+        <h2>Historial de órdenes</h2>
+
+        {% if ordenes %}
+
+            <div class="tabla-contenedor">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Tracking ID</th>
+                            <th>Tipo</th>
+                            <th>Peso</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for orden in ordenes %}
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        {{ orden.tracking_id }}
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    {{ orden.tipo }}
+                                </td>
+
+                                <td>
+                                    {{ orden.peso }} lb
+                                </td>
+
+                                <td>
+                                    {% if orden.precio %}
+                                        ${{ orden.precio }}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </td>
+
+                                <td class="estado">
+                                    {{ orden.estado }}
+                                </td>
+
+                                <td>
+                                    {{ orden.fecha_creacion|date:"d/m/Y H:i" }}
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {% else %}
+
+            <p>
+                Este cliente todavía no tiene órdenes.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

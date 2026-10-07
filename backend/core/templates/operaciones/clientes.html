@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clientes - KOCH ENVÍOS</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .encabezado {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .encabezado h1 {
+            margin: 0 0 8px 0;
+        }
+
+        .lista {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cliente {
+            display: block;
+            background: white;
+            padding: 18px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #1f2937;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .cliente:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+        }
+
+        .numero {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .nombre {
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .boton-volver {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 16px;
+            background: #1f2937;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .sin-clientes {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <div class="encabezado">
+
+        <h1>Clientes KOCH ENVÍOS</h1>
+
+        <div>
+            Clientes registrados:
+            <strong>{{ clientes|length }}</strong>
+        </div>
+
+        <a
+            href="{% url 'panel_operaciones' %}"
+            class="boton-volver"
+        >
+            ← Volver al panel
+        </a>
+
+    </div>
+
+
+    {% if clientes %}
+
+        <div class="lista">
+
+            {% for cliente in clientes %}
+
+                <a
+                    href="{% url 'detalle_cliente' cliente.customer_number %}"
+                    class="cliente"
+                >
+
+                    <span class="numero">
+                        {{ cliente.customer_number }}
+                    </span>
+
+                    <span class="nombre">
+                        {{ cliente.nombre }}
+                        {{ cliente.apellidos }}
+                    </span>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="sin-clientes">
+            No existen clientes registrados.
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

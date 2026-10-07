@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Configuración - KOCH ENVÍOS</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        h1 { margin: 0; color: #123b73; }
+
+        .boton-volver {
+            text-decoration: none;
+            background: #123b73;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .titulo-seccion {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #123b73;
+            font-size: 20px;
+        }
+
+        .ayuda {
+            color: #6b7280;
+            font-size: 14px;
+            margin: 0 0 16px 0;
+            line-height: 1.5;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .campo { display: flex; flex-direction: column; gap: 6px; }
+
+        .campo.ancho { grid-column: 1 / -1; }
+
+        .campo label { font-weight: bold; font-size: 14px; }
+
+        .campo small { color: #6b7280; font-size: 12px; }
+
+        .campo input,
+        .campo textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+        }
+
+        .campo textarea { min-height: 90px; resize: vertical; }
+
+        .botones {
+            display: flex;
+            justify-content: flex-end;
+            margin: 25px 0;
+        }
+
+        .boton-guardar {
+            border: none;
+            background: #0d6efd;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .boton-guardar:hover { background: #0b5ed7; }
+
+        .mensaje {
+            margin-bottom: 20px;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .mensaje.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-color: #fca5a5;
+        }
+
+        .enlaces { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; }
+
+        .enlaces a { font-weight: bold; color: #0d6efd; }
+
+        .badge {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            border-radius: 999px;
+            padding: 1px 8px;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .contenedor { margin: 20px auto; padding: 15px; }
+            .encabezado { flex-direction: column; align-items: flex-start; gap: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <div class="encabezado">
+        <h1>⚙️ Configuración</h1>
+        <a href="{% url 'panel_operaciones' %}" class="boton-volver">← Volver al panel</a>
+    </div>
+
+    {% if messages %}
+        {% for m in messages %}
+            <div class="mensaje {% if m.tags == 'error' %}error{% endif %}">
+                {% if m.tags == 'error' %}⚠️{% else %}✅{% endif %} {{ m }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <!-- PRÓXIMA SALIDA -->
+        <div class="tarjeta">
+            <h2 class="titulo-seccion">🚢 Próxima salida</h2>
+            <p class="ayuda">
+                Fecha y hora de la próxima salida hacia Cuba, en hora de Cuba.
+                La cuenta regresiva de la página principal usa esta fecha y hora.
+                Si la dejas vacía, la página mostrará "Por confirmar".
+            </p>
+
+            <div class="grid">
+                <div class="campo">
+                    <label for="proximo_envio">Fecha y hora</label>
+                    <input type="datetime-local" id="proximo_envio" name="proximo_envio"
+                           value="{{ proximo_envio_input }}">
+                </div>
+            </div>
+        </div>
+
+        <!-- TARIFAS -->
+        <div class="tarjeta">
+            <h2 class="titulo-seccion">💲 Costo por libra</h2>
+            <p class="ayuda">
+                Estos valores se muestran en las tarjetas de precios de la página principal
+                y la calculadora de costo los usa para calcular, así que siempre coinciden.
+            </p>
+
+            <div class="grid">
+                <div class="campo">
+                    <label for="tarifa_menos_50">Paquetes de 50 lb o menos (USD/lb)</label>
+                    <input type="number" step="0.01" min="0" max="9999.99" required
+                           id="tarifa_menos_50" name="tarifa_menos_50"
+                           value="{{ valores.tarifa_menos_50 }}">
+                </div>
+
+                <div class="campo">
+                    <label for="tarifa_mas_50">Paquetes de más de 50 lb (USD/lb)</label>
+                    <input type="number" step="0.01" min="0" max="9999.99" required
+                           id="tarifa_mas_50" name="tarifa_mas_50"
+                           value="{{ valores.tarifa_mas_50 }}">
+                </div>
+
+                <div class="campo">
+                    <label for="tarifa_mixto">Paquete mezclado (USD/lb)</label>
+                    <input type="number" step="0.01" min="0" max="9999.99" required
+                           id="tarifa_mixto" name="tarifa_mixto"
+                           value="{{ valores.tarifa_mixto }}">
+                </div>
+            </div>
+        </div>
+
+        <!-- ELECTRÓNICOS -->
+        <div class="tarjeta">
+            <h2 class="titulo-seccion">📱 Costo de electrónicos</h2>
+            <p class="ayuda">Precio por equipo (USD) que aparece en la página principal.</p>
+
+            <div class="grid">
+                <div class="campo">
+                    <label for="precio_celular">Celular</label>
+                    <input type="number" step="0.01" min="0" max="999999.99" required
+                           id="precio_celular" name="precio_celular"
+                           value="{{ valores.precio_celular }}">
+                </div>
+
+                <div class="campo">
+                    <label for="precio_tablet">iPad / Tablet</label>
+                    <input type="number" step="0.01" min="0" max="999999.99" required
+                           id="precio_tablet" name="precio_tablet"
+                           value="{{ valores.precio_tablet }}">
+                </div>
+
+                <div class="campo">
+                    <label for="precio_laptop">Laptop</label>
+                    <input type="number" step="0.01" min="0" max="999999.99" required
+                           id="precio_laptop" name="precio_laptop"
+                           value="{{ valores.precio_laptop }}">
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACTO PÚBLICO -->
+        <div class="tarjeta">
+            <h2 class="titulo-seccion">📞 Contacto en la página principal</h2>
+            <p class="ayuda">
+                Estos datos aparecen en la sección de contacto, el botón de WhatsApp
+                y la dirección de recepción de la página principal.
+            </p>
+
+            <div class="grid">
+                <div class="campo">
+                    <label for="contacto_email">Correo de contacto</label>
+                    <input type="email" id="contacto_email" name="contacto_email" required
+                           maxlength="254" value="{{ configuracion.contacto_email }}">
+                </div>
+
+                <div class="campo">
+                    <label for="contacto_whatsapp">WhatsApp</label>
+                    <input type="text" id="contacto_whatsapp" name="contacto_whatsapp" required
+                           maxlength="40" value="{{ configuracion.contacto_whatsapp }}"
+                           placeholder="+53 59307450">
+                    <small>Con código de país. Es el número de los botones de WhatsApp.</small>
+                </div>
+
+                <div class="campo">
+                    <label for="contacto_telefono_usa">Teléfono de Estados Unidos</label>
+                    <input type="text" id="contacto_telefono_usa" name="contacto_telefono_usa" required
+                           maxlength="40" value="{{ configuracion.contacto_telefono_usa }}"
+                           placeholder="+1 (813) 255-6899">
+                </div>
+
+                <div class="campo">
+                    <label for="contacto_telefono_cuba">Teléfono de Cuba</label>
+                    <input type="text" id="contacto_telefono_cuba" name="contacto_telefono_cuba" required
+                           maxlength="40" value="{{ configuracion.contacto_telefono_cuba }}"
+                           placeholder="+53 59307450">
+                </div>
+
+                <div class="campo ancho">
+                    <label for="contacto_direccion">Dirección de recepción en Estados Unidos</label>
+                    <textarea id="contacto_direccion" name="contacto_direccion" required
+                              maxlength="300">{{ configuracion.contacto_direccion }}</textarea>
+                    <small>Una línea por renglón (máximo 4). La primera se muestra en negrita.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- CORREOS -->
+        <div class="tarjeta">
+            <h2 class="titulo-seccion">📧 Correos de notificación</h2>
+            <p class="ayuda">
+                Quién recibe los avisos de nuevas órdenes y desde qué dirección se envían
+                los correos a los clientes. El remitente debe estar autorizado por tu
+                proveedor de correo; si no, los envíos fallarán o caerán en spam.
+            </p>
+
+            <div class="grid">
+                <div class="campo">
+                    <label for="email_admin">📥 Correo que recibe los avisos</label>
+                    <input type="email" id="email_admin" name="email_admin" maxlength="254"
+                           value="{{ configuracion.email_admin }}" placeholder="admin@ejemplo.com">
+                </div>
+
+                <div class="campo">
+                    <label for="email_remitente">📤 Correo desde el que se envía</label>
+                    <input type="email" id="email_remitente" name="email_remitente" maxlength="254"
+                           value="{{ configuracion.email_remitente }}" placeholder="no-reply@tudominio.com">
+                    <small>Si lo dejas vacío se usa el de la configuración del servidor.</small>
+                </div>
+
+                <div class="campo">
+                    <label for="nombre_remitente">🏷️ Nombre del remitente</label>
+                    <input type="text" id="nombre_remitente" name="nombre_remitente" maxlength="100"
+                           value="{{ configuracion.nombre_remitente }}" placeholder="KOCH ENVÍOS">
+                </div>
+            </div>
+        </div>
+
+        <div class="botones">
+            <button type="submit" class="boton-guardar">💾 Guardar configuración</button>
+        </div>
+
+    </form>
+
+
+    <div class="tarjeta">
+
+        <h2 class="titulo-seccion">✉️ Correos a clientes</h2>
+
+        <p class="ayuda">
+            Guarda la configuración y luego envía un correo de prueba al
+            "correo que recibe los avisos" para comprobar que el remitente funciona.
+        </p>
+
+        <form method="POST" action="{% url 'enviar_correo_prueba' %}">
+            {% csrf_token %}
+            <button type="submit" class="boton-guardar">📨 Enviar correo de prueba</button>
+        </form>
+
+        <div class="enlaces">
+            <a href="{% url 'plantillas_correo' %}">✏️ Editar los textos de los correos</a>
+            <a href="{% url 'lista_correos' %}">
+                📬 Correos enviados
+                {% if correos_fallidos %}<span class="badge">{{ correos_fallidos }} sin enviar</span>{% endif %}
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

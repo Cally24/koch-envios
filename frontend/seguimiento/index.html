@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Seguimiento de tu paquete | KOCH ENVÍOS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #17202a;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 220px;
+            max-height: 92px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            color: #d1d5db;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px 50px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #6b7280;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-button:hover {
+            background: #1d4ed8;
+        }
+
+        .submit-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .result {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 12px;
+            line-height: 1.7;
+        }
+
+        .result.success {
+            display: block;
+            background: #eff6ff;
+            border: 1px solid #93c5fd;
+            color: #1e3a8a;
+        }
+
+        .result.error {
+            display: block;
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+        }
+
+        .tracking-box {
+            background: white;
+            border: 1px solid #dbeafe;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .tracking-id {
+            font-size: 21px;
+            font-weight: bold;
+            color: #1d4ed8;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #dbeafe;
+            color: #1e40af;
+            font-weight: bold;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 9px;
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            text-align: center;
+            color: #6b7280;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 22px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <img
+        src="/logo.png"
+        alt="KOCH ENVÍOS"
+        class="logo"
+    >
+
+    <h1>Seguimiento de tu paquete</h1>
+
+    <p>Consulta el estado de tu envío</p>
+
+</header>
+
+
+<main class="container">
+
+    <a href="/" class="back-link">
+        ← Volver al inicio
+    </a>
+
+
+    <section class="card">
+
+        <h2>Rastrea tu envío</h2>
+
+        <p class="description">
+            Introduce tu Número de Cliente y el Tracking ID
+            que recibiste al crear tu orden.
+        </p>
+
+
+        <form
+            id="seguimientoForm"
+            onsubmit="buscarPaquete(event)"
+        >
+
+            <div class="form-group">
+
+                <label for="customer_number">
+                    Número de cliente
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="customer_number"
+                    name="customer_number"
+                    placeholder="Ejemplo: CUB-12345"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="tracking_id">
+                    Tracking ID
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="tracking_id"
+                    name="tracking_id"
+                    placeholder="Ejemplo: TRK-123456"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-button"
+                id="buscarButton"
+            >
+                🔎 RASTREAR PAQUETE
+            </button>
+
+        </form>
+
+
+        <div
+            id="seguimientoResult"
+            class="result"
+        ></div>
+
+
+        <div class="info">
+
+            <strong>¿Dónde encuentro estos datos?</strong>
+
+            <br><br>
+
+            Tu <strong>Número de Cliente</strong> se entrega
+            cuando completas tu registro en KOCH ENVÍOS.
+
+            <br><br>
+
+            Tu <strong>Tracking ID</strong> se genera cuando
+            creas una orden.
+
+            <br><br>
+
+            Guarda ambos datos para poder consultar
+            posteriormente el estado de tu envío.
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    KOCH ENVÍOS 🇺🇸 → 🇨🇺
+
+</footer>
+
+
+<script>
+
+async function buscarPaquete(event) {
+
+    event.preventDefault();
+
+    const customerNumber =
+        document
+            .getElementById("customer_number")
+            .value
+            .trim();
+
+    const trackingId =
+        document
+            .getElementById("tracking_id")
+            .value
+            .trim()
+            .toUpperCase();
+
+    const button =
+        document.getElementById("buscarButton");
+
+    const box =
+        document.getElementById("seguimientoResult");
+
+
+    if (!customerNumber) {
+
+        mostrarError(
+            "Debes introducir tu Número de Cliente."
+        );
+
+        return;
+    }
+
+
+    if (!trackingId) {
+
+        mostrarError(
+            "Debes introducir un Tracking ID."
+        );
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Buscando envío...";
+
+    box.style.display = "none";
+
+
+    try {
+
+        const response = await fetch(
+            `/api/tracking/buscar/?tracking_id=${encodeURIComponent(trackingId)}`
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            mostrarError(
+                data.error ||
+                "No encontramos un envío con ese Tracking ID."
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // VERIFICAR QUE EL TRACKING PERTENECE
+        // AL CUSTOMER NUMBER INTRODUCIDO
+        // ==========================================
+
+        const clienteEncontrado =
+            String(data.cliente_customer_number).trim();
+
+        const clienteBuscado =
+            String(customerNumber).trim();
+
+
+        if (clienteEncontrado !== clienteBuscado) {
+
+            mostrarError(
+                "El Tracking ID no corresponde al Número de Cliente introducido."
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // MOSTRAR RESULTADO
+        // ==========================================
+
+        mostrarResultado(data);
+
+
+    } catch (error) {
+
+        console.error(
+            "Error al buscar el envío:",
+            error
+        );
+
+        mostrarError(
+            "⚠️ No se pudo conectar con el servidor."
+        );
+
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "🔎 RASTREAR PAQUETE";
+
+    }
+
+}
+
+
+    function mostrarResultado(data) {
+
+        const box =
+            document.getElementById(
+                "seguimientoResult"
+            );
+
+
+        const orden =
+            data.orden || data;
+
+
+        const tracking =
+            orden.tracking_id ||
+            data.tracking_id ||
+            "";
+
+
+        const estado =
+            orden.estado ||
+            data.estado ||
+            "Sin información";
+
+
+        const producto =
+            orden.producto ||
+            data.producto ||
+            "";
+
+
+        const cantidad =
+            orden.cantidad ||
+            data.cantidad ||
+            "";
+
+
+        box.className =
+            "result success";
+         box.style.display =
+            "block";	
+
+        box.innerHTML = `
+
+            <strong>✅ Envío encontrado</strong>
+
+            <div class="tracking-box">
+
+                <div>
+                    <small>Tracking ID</small>
+                </div>
+
+                <div class="tracking-id">
+                    ${tracking}
+                </div>
+
+                <div>
+                    <small>Estado del envío</small>
+                </div>
+
+                <div class="status">
+                    ${estado}
+                </div>
+
+                ${
+                    producto
+                    ? `
+                        <br><br>
+                        <strong>Pedido:</strong>
+                        ${producto}
+                    `
+                    : ""
+                }
+
+                ${
+                    cantidad
+                    ? `
+                        <br>
+                        <strong>Items:</strong>
+                        ${cantidad}
+                    `
+                    : ""
+                }
+
+            </div>
+
+        `;
+
+    }
+
+
+    function mostrarError(mensaje) {
+
+        const box =
+            document.getElementById(
+                "seguimientoResult"
+            );
+
+
+        box.className =
+            "result error";
+
+
+        box.innerHTML =
+            `❌ ${mensaje}`;
+
+    }
+
+</script>
+
+</body>
+</html>

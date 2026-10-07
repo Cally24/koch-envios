@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Correos enviados - KOCH ENVÍOS</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .contenedor { max-width: 1200px; margin: 0 auto; }
+
+        .encabezado {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .encabezado h1 { margin: 0 0 8px 0; color: #123b73; }
+
+        .ayuda { color: #6b7280; font-size: 14px; margin: 0 0 14px 0; line-height: 1.5; }
+
+        .boton-volver {
+            display: inline-block;
+            padding: 10px 16px;
+            background: #1f2937;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-right: 8px;
+        }
+
+        .filtros { margin-top: 16px; }
+
+        .filtros a {
+            display: inline-block;
+            margin-right: 12px;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .filtros a.activo { color: #1f2937; text-decoration: underline; }
+
+        .alerta {
+            margin-bottom: 20px;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .alerta.success { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .alerta.error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+        .seccion {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .tabla-contenedor { overflow-x: auto; }
+
+        table { width: 100%; border-collapse: collapse; }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+            font-size: 14px;
+        }
+
+        th { background: #f9fafb; white-space: nowrap; }
+
+        .estado {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-weight: bold;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .estado.enviado { background: #dcfce7; color: #166534; }
+        .estado.fallido { background: #fee2e2; color: #991b1b; }
+        .estado.pendiente { background: #fef3c7; color: #92400e; }
+        .estado.atendido { background: #e5e7eb; color: #374151; }
+
+        .error-detalle {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #991b1b;
+            max-width: 340px;
+            word-break: break-word;
+        }
+
+        .acciones { display: flex; flex-direction: column; gap: 6px; min-width: 120px; }
+
+        .acciones form { margin: 0; }
+
+        .btn {
+            width: 100%;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn.reintentar { background: #16a34a; }
+        .btn.descartar { background: #6b7280; }
+        .btn:disabled { opacity: 0.6; cursor: wait; }
+
+        .vacio { padding: 20px 0; color: #6b7280; }
+
+        @media (max-width: 600px) { body { padding: 15px; } }
+    </style>
+</head>
+
+<body>
+<div class="contenedor">
+
+    <div class="encabezado">
+
+        <h1>📬 Correos enviados</h1>
+
+        <p class="ayuda">
+            Aquí queda el registro de los correos que envía el sistema. Si alguno no
+            se pudo enviar (por ejemplo, por un fallo de conexión con el servidor de
+            correo), aparece en rojo y puedes reintentarlo. Esto detecta los fallos de
+            envío; si una dirección no existe, el rebote llegará más tarde a la bandeja
+            del correo remitente y el sistema no lo ve.
+        </p>
+
+        <a href="{% url 'panel_operaciones' %}" class="boton-volver">← Volver al panel</a>
+        <a href="{% url 'configuracion_operaciones' %}" class="boton-volver">⚙️ Configuración</a>
+
+        <div class="filtros">
+            <a href="{% url 'lista_correos' %}" class="{% if not solo_fallidos %}activo{% endif %}">Todos</a>
+            <a href="{% url 'lista_correos' %}?filtro=fallidos" class="{% if solo_fallidos %}activo{% endif %}">
+                Sin enviar ({{ correos_fallidos }})
+            </a>
+        </div>
+
+    </div>
+
+    {% if messages %}
+        {% for m in messages %}
+            <div class="alerta {{ m.tags }}">
+                {% if m.tags == 'success' %}✅{% else %}⚠️{% endif %} {{ m }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="seccion">
+
+        {% if registros %}
+
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Correo</th>
+                        <th>Destinatario</th>
+                        <th>Referencia</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for r in registros %}
+                    <tr>
+                        <td>{{ r.fecha_creacion|date:"d/m/Y H:i" }}</td>
+
+                        <td>
+                            {{ r.evento_legible }}<br>
+                            <small>{{ r.asunto }}</small>
+                        </td>
+
+                        <td>{{ r.destinatario }}</td>
+
+                        <td>{{ r.referencia|default:"—" }}</td>
+
+                        <td>
+                            {% if r.estado == 'enviado' %}
+                                <span class="estado enviado">✔ Enviado</span>
+                            {% elif r.estado == 'fallido' and r.resuelto %}
+                                <span class="estado atendido">Atendido</span>
+                            {% elif r.estado == 'fallido' %}
+                                <span class="estado fallido">✖ No se envió</span>
+                            {% else %}
+                                <span class="estado pendiente">Enviando…</span>
+                            {% endif %}
+
+                            {% if r.estado == 'fallido' and r.error and not r.resuelto %}
+                                <div class="error-detalle">{{ r.error }}</div>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if r.estado == 'fallido' and not r.resuelto %}
+                            <div class="acciones">
+                                <form method="post" action="{% url 'reintentar_correo' %}"
+                                      onsubmit="var b=this.querySelector('button'); b.disabled=true; b.textContent='Enviando...';">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="registro_id" value="{{ r.id }}">
+                                    <button type="submit" class="btn reintentar">🔁 Reintentar</button>
+                                </form>
+
+                                <form method="post" action="{% url 'descartar_correo' %}"
+                                      onsubmit="return confirm('¿Descartar este correo? Dejará de aparecer como pendiente.');">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="registro_id" value="{{ r.id }}">
+                                    <button type="submit" class="btn descartar">Descartar</button>
+                                </form>
+                            </div>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% else %}
+
+            <div class="vacio">
+                {% if solo_fallidos %}
+                    ✅ No hay correos pendientes de reenviar.
+                {% else %}
+                    Todavía no se ha enviado ningún correo.
+                {% endif %}
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+</body>
+</html>

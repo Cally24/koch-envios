@@ -1,0 +1,40 @@
+# ===== Django / Python =====
+backend/.env
+backend/db.sqlite3
+backend/venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ===== Secretos VAPID =====
+backend/vapid_private.txt
+backend/vapid_public.txt
+
+# ===== Archivos subidos por usuarios =====
+backend/media/
+
+# ===== Node / Frontend =====
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ===== Variables de entorno =====
+.env
+.env.*
+!.env.example
+
+# ===== IDE / sistema =====
+.vscode/
+.idea/
+*.log
+Thumbs.db
+Desktop.ini
+
+# ===== Backups de desarrollo - NO publicar =====
+backend/core/admin_backup.py
+backend/core/admin_backup_2.py
+backend/core/views_actual.py
+backend/core/views_backup.py
+frontend/index - Copy.html
+frontend/seguimiento/index_backup.html
+frontend/seguimiento/index_backup2.html

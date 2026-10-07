@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Orden | KOCH ENVÍOS</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fa;
+        color: #17202a;
+        min-height: 100vh;
+    }
+
+    .header {
+        background: #111827;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .logo {
+        max-width: 220px;
+        max-height: 92px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+        margin-bottom: 6px;
+    }
+
+    .header p {
+        color: #d1d5db;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 900px;
+        margin: 35px auto;
+        padding: 0 20px 50px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h2 {
+        margin-bottom: 8px;
+        font-size: 22px;
+    }
+
+    .card-description {
+        color: #6b7280;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .required {
+        color: #dc2626;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 9px;
+        font-size: 15px;
+        background: white;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    .order-types {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .order-type {
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .order-type:hover {
+        border-color: #2563eb;
+    }
+
+    .order-type input {
+        width: auto;
+        margin-right: 8px;
+    }
+
+    .order-type strong {
+        display: block;
+        font-size: 17px;
+        margin-bottom: 8px;
+    }
+
+    .order-type span {
+        color: #6b7280;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .links-container {
+        margin-top: 10px;
+    }
+
+    .link-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .link-row input {
+        flex: 1;
+    }
+
+    .remove-link {
+        border: none;
+        background: #fee2e2;
+        color: #b91c1c;
+        padding: 0 16px;
+        border-radius: 9px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .add-link {
+        border: 1px dashed #2563eb;
+        background: #eff6ff;
+        color: #1d4ed8;
+        padding: 11px 16px;
+        border-radius: 9px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .items-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .upload-area {
+        border: 2px dashed #9ca3af;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+        background: #f9fafb;
+    }
+
+    .upload-area p {
+        color: #6b7280;
+        margin-bottom: 15px;
+    }
+
+    .upload-area input {
+        border: none;
+        padding: 5px;
+    }
+
+    .file-list {
+        margin-top: 12px;
+        text-align: left;
+        font-size: 14px;
+        color: #374151;
+    }
+
+    .notice {
+        background: #fff7ed;
+        border-left: 4px solid #f97316;
+        padding: 15px;
+        border-radius: 8px;
+        color: #7c2d12;
+        line-height: 1.5;
+        margin-top: 15px;
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 17px;
+        border: none;
+        border-radius: 10px;
+        background: #2563eb;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .submit-button:hover {
+        background: #1d4ed8;
+    }
+
+    .submit-button:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+    }
+
+    .result {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        line-height: 1.6;
+    }
+
+    .result.success {
+        display: block;
+        background: #dcfce7;
+        border: 1px solid #86efac;
+        color: #166534;
+    }
+
+    .result.error {
+        display: block;
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+        color: #991b1b;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    .footer {
+        text-align: center;
+        color: #6b7280;
+        padding: 25px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 650px) {
+        .order-types,
+        .items-row {
+            grid-template-columns: 1fr;
+        }
+
+        .link-row {
+            flex-direction: column;
+        }
+
+        .remove-link {
+            padding: 10px;
+        }
+
+        .card {
+            padding: 20px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+    <img src="/logo.png" alt="KOCH ENVÍOS" class="logo">
+
+<h1>Crear Orden</h1>
+<p>Completa los datos de tu pedido</p>
+
+</header>
+
+<main class="container">
+
+<a href="/" class="back-link">← Volver al inicio</a>
+
+<form id="ordenForm" onsubmit="crearOrden(event)">
+
+    <!-- DATOS DEL CLIENTE -->
+    <section class="card">
+        <h2>1. Datos del cliente</h2>
+
+        <p class="card-description">
+            Introduce tu número de cliente. Este número fue proporcionado
+            cuando realizaste tu registro en KOCH ENVÍOS.
+        </p>
+
+        <div class="form-group">
+
+            <label for="ord_customer_number">
+                Número de cliente <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="ord_customer_number"
+                name="customer_number"
+                placeholder="Ejemplo: 12345"
+                required
+            >
+
+        </div>
+    </section>
+
+
+    <!-- TIPO DE ORDEN -->
+    <section class="card">
+        <h2>2. Tipo de orden</h2>
+
+        <p class="card-description">
+            Selecciona qué tipo de compra deseas realizar.
+        </p>
+
+        <div class="order-types">
+
+            <label class="order-type">
+                <input
+                    type="radio"
+                    name="tipo_orden"
+                    value="compra_directa"
+                    checked
+                >
+
+                <strong>🛒 Compra directa</strong>
+
+                <span>
+                    Ya realizaste la compra y deseas enviar los artículos
+                    con KOCH ENVÍOS.
+                </span>
+            </label>
+
+            <label class="order-type">
+                <input
+                    type="radio"
+                    name="tipo_orden"
+                    value="compra_asistida"
+                >
+
+                <strong>🤝 Compra asistida</strong>
+
+                <span>
+                    KOCH ENVÍOS realizará la compra siguiendo los productos
+                    y enlaces que nos proporciones.
+                </span>
+            </label>
+
+        </div>
+    </section>
+
+
+    <!-- PRODUCTOS -->
+    <section class="card">
+        <h2>3. Información del pedido</h2>
+
+        <p class="card-description">
+            Indica qué productos forman parte de tu orden.
+        </p>
+
+        <div class="items-row">
+
+            <div class="form-group">
+
+                <label for="ord_producto">
+                    Descripción del pedido <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="ord_producto"
+                    placeholder="Ej: Ropa, zapatos y accesorios"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="ord_cantidad">
+                    Número de items <span class="required">*</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="ord_cantidad"
+                    min="1"
+                    value="1"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="ord_peso">
+                Peso aproximado (lb)
+            </label>
+
+            <input
+                type="number"
+                id="ord_peso"
+                min="0"
+                step="0.01"
+                placeholder="Ej: 15.5"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- ENLACES -->
+    <section class="card">
+
+        <h2>4. Enlaces de los productos</h2>
+
+        <p class="card-description">
+            Si estás realizando una compra asistida, agrega los enlaces
+            de todos los productos que deseas comprar.
+        </p>
+
+        <div id="linksContainer" class="links-container">
+
+            <div class="link-row">
+
+                <input
+                    type="url"
+                    name="producto_link[]"
+                    placeholder="https://..."
+                >
+
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            class="add-link"
+            onclick="agregarEnlace()"
+        >
+            + Agregar otro enlace
+        </button>
+
+    </section>
+
+
+    <!-- CAPTURAS -->
+    <section class="card">
+
+        <h2>5. Capturas de pantalla</h2>
+
+        <p class="card-description">
+            Debes adjuntar las capturas de pantalla correspondientes a
+            los productos de tu pedido.
+        </p>
+
+        <div class="upload-area">
+
+            <p>
+                📷 Selecciona una o varias capturas de pantalla.
+            </p>
+
+            <input
+                type="file"
+                id="capturas"
+                name="capturas"
+                accept="image/*"
+                multiple
+                required
+            >
+
+            <div id="fileList" class="file-list"></div>
+
+        </div>
+
+        <div class="notice">
+            <strong>Importante:</strong>
+            Las capturas de pantalla son obligatorias para poder
+            confirmar el pedido.
+        </div>
+
+    </section>
+
+
+    <!-- INFORMACIÓN ADICIONAL -->
+    <section class="card">
+
+        <h2>6. Información adicional</h2>
+
+        <p class="card-description">
+            Si necesitas indicarnos algo sobre tu pedido, escríbelo aquí.
+        </p>
+
+        <div class="form-group">
+
+            <label for="ord_notas">
+                Comentarios o instrucciones
+            </label>
+
+            <textarea
+                id="ord_notas"
+                placeholder="Escribe aquí cualquier información adicional..."
+            ></textarea>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONFIRMAR -->
+    <section class="card">
+
+        <h2>7. Confirmar pedido</h2>
+
+        <p class="card-description">
+            Revisa que todos los datos sean correctos antes de enviar
+            tu orden.
+        </p>
+
+        <button
+            type="submit"
+            class="submit-button"
+            id="submitButton"
+        >
+            ✈️ CONFIRMAR PEDIDO
+        </button>
+
+        <div id="ordenResult" class="result"></div>
+
+    </section>
+
+</form>
+
+</main>
+
+<footer class="footer">
+    KOCH ENVÍOS 🇺🇸 → 🇨🇺
+</footer>
+
+<script>
+
+    // ==========================================
+    // AGREGAR ENLACES DE PRODUCTOS
+    // ==========================================
+
+    function agregarEnlace() {
+
+        const container =
+            document.getElementById("linksContainer");
+
+        const row =
+            document.createElement("div");
+
+        row.className = "link-row";
+
+        row.innerHTML = `
+            <input
+                type="url"
+                name="producto_link[]"
+                placeholder="https://..."
+            >
+
+            <button
+                type="button"
+                class="remove-link"
+                onclick="this.parentElement.remove()"
+            >
+                Eliminar
+            </button>
+        `;
+
+        container.appendChild(row);
+    }
+
+
+    // ==========================================
+    // MOSTRAR ARCHIVOS SELECCIONADOS
+    // ==========================================
+
+    document
+        .getElementById("capturas")
+        .addEventListener("change", function () {
+
+            const fileList =
+                document.getElementById("fileList");
+
+            fileList.innerHTML = "";
+
+            if (this.files.length === 0) {
+                return;
+            }
+
+            const title =
+                document.createElement("strong");
+
+            title.textContent =
+                `${this.files.length} archivo(s) seleccionado(s):`;
+
+            fileList.appendChild(title);
+
+            const list =
+                document.createElement("ul");
+
+            list.style.marginTop = "8px";
+            list.style.paddingLeft = "20px";
+
+            Array.from(this.files).forEach(file => {
+
+                const item =
+                    document.createElement("li");
+
+                item.textContent =
+                    file.name;
+
+                list.appendChild(item);
+
+            });
+
+            fileList.appendChild(list);
+
+        });
+
+
+    // ==========================================
+    // OBTENER CSRF TOKEN DE DJANGO
+    // ==========================================
+
+    function obtenerCookie(nombre) {
+
+        const cookies =
+            document.cookie.split(";");
+
+        for (let cookie of cookies) {
+
+            cookie = cookie.trim();
+
+            if (cookie.startsWith(nombre + "=")) {
+
+                return decodeURIComponent(
+                    cookie.substring(nombre.length + 1)
+                );
+            }
+        }
+
+        return null;
+    }
+
+
+    // ==========================================
+    // CREAR ORDEN
+    // ==========================================
+
+    async function crearOrden(event) {
+
+        event.preventDefault();
+
+        const button =
+            document.getElementById("submitButton");
+
+        const box =
+            document.getElementById("ordenResult");
+
+
+        // ======================================
+        // DATOS DEL FORMULARIO
+        // ======================================
+
+        const clienteId =
+            document
+                .getElementById("ord_customer_number")
+                .value
+                .trim();
+
+        const tipoOrden =
+            document
+                .querySelector(
+                    'input[name="tipo_orden"]:checked'
+                )
+                .value;
+
+        const producto =
+            document
+                .getElementById("ord_producto")
+                .value
+                .trim();
+
+        const cantidad =
+            parseInt(
+                document.getElementById("ord_cantidad").value,
+                10
+            );
+
+        const pesoValue =
+            document.getElementById("ord_peso").value;
+
+        const peso =
+            pesoValue
+                ? parseFloat(pesoValue)
+                : null;
+
+        const notas =
+            document
+                .getElementById("ord_notas")
+                .value
+                .trim();
+
+
+        // ======================================
+        // RECOGER ENLACES
+        // ======================================
+
+        const enlaces =
+            Array.from(
+                document.querySelectorAll(
+                    'input[name="producto_link[]"]'
+                )
+            )
+            .map(input => input.value.trim())
+            .filter(value => value !== "");
+
+
+        // ======================================
+        // RECOGER CAPTURAS
+        // ======================================
+
+        const capturas =
+            document.getElementById("capturas").files;
+
+
+        if (capturas.length === 0) {
+
+            box.className =
+                "result error";
+
+            box.innerHTML =
+                "❌ Debes adjuntar al menos una captura de pantalla.";
+
+            return;
+        }
+
+
+        // ======================================
+        // CREAR FORM DATA
+        // ======================================
+
+        const datos =
+            new FormData();
+
+        datos.append(
+            "customer_number",
+            clienteId
+        );
+
+        datos.append(
+            "tipo_orden",
+            tipoOrden
+        );
+
+        datos.append(
+            "producto",
+            producto
+        );
+
+        datos.append(
+            "cantidad",
+            cantidad
+        );
+
+        if (peso !== null) {
+
+            datos.append(
+                "peso",
+                peso
+            );
+        }
+
+        datos.append(
+            "notas",
+            notas
+        );
+
+
+        // ======================================
+        // AGREGAR ENLACES
+        // ======================================
+
+        enlaces.forEach(enlace => {
+
+            datos.append(
+                "enlaces",
+                enlace
+            );
+
+        });
+
+
+        // ======================================
+        // AGREGAR CAPTURAS
+        // ======================================
+
+        Array.from(capturas).forEach(archivo => {
+
+            datos.append(
+                "capturas",
+                archivo
+            );
+
+        });
+
+
+        // ======================================
+        // PREPARAR BOTÓN
+        // ======================================
+
+        button.disabled = true;
+
+        button.textContent =
+            "Enviando pedido...";
+
+        box.className =
+            "result";
+
+        box.style.display =
+            "none";
+
+
+        // ======================================
+        // ENVIAR AL BACKEND
+        // ======================================
+
+        try {
+
+            const csrfToken =
+                obtenerCookie("csrftoken");
+
+            const headers = {};
+
+            if (csrfToken) {
+
+                headers["X-CSRFToken"] =
+                    csrfToken;
+            }
+
+
+            const response =
+                await fetch(
+                    "/api/ordenes/crear_orden/",
+                    {
+                        method: "POST",
+                        headers: headers,
+                        body: datos
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+// ==================================
+// RESPUESTA EXITOSA
+// ==================================
+
+if (response.ok) {
+
+    box.className =
+        "result success";
+
+    box.style.display =
+        "block";
+
+    box.innerHTML = `
+
+        <strong>
+            ✅ ¡Orden creada correctamente!
+        </strong>
+
+        <br><br>
+
+        Tu pedido ha sido registrado.
+
+        <br>
+
+        <strong>Tracking ID:</strong>
+        ${data.tracking_id || "Pendiente"}
+
+        <br><br>
+
+        <strong>Importante:</strong>
+
+        Guarda tu Tracking ID.
+        Lo necesitarás junto con tu número de cliente
+        para consultar el estado de tu envío.
+
+    `;
+
+
+    document
+        .getElementById("ordenForm")
+        .reset();
+
+    document
+        .getElementById("fileList")
+        .innerHTML = "";
+
+
+} else {
+
+    box.className =
+        "result error";
+
+    box.style.display =
+        "block";
+
+    box.innerHTML =
+        `❌ ${
+            data.error ||
+            "No se pudo crear la orden."
+        }`;
+}
+
+
+} catch (error) {
+
+    console.error(
+        "Error al crear la orden:",
+        error
+    );
+
+    box.className =
+        "result error";
+
+    box.style.display =
+        "block";
+
+    box.innerHTML =
+        "⚠️ Error de conexión con el servidor.";
+}
+
+finally {
+
+    button.disabled = false;
+
+    button.textContent =
+        "✈️ CONFIRMAR PEDIDO";
+
+}
+
+}
+</script>
+
+</body>
+
+</html>

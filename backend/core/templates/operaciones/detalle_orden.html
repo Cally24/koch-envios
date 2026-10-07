@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Orden {{ orden.tracking_id }} - KOCH ENVÍOS
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .encabezado {
+            margin-bottom: 25px;
+        }
+
+        .tracking {
+            color: #2563eb;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .cliente {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .datos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .dato {
+            padding: 14px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .etiqueta {
+            display: block;
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .valor {
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .estado {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .capturas {
+            margin-top: 20px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 11px 18px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .boton:hover {
+            background: #1d4ed8;
+        }
+
+        .boton-secundario {
+            background: #1f2937;
+        }
+
+        .boton-secundario:hover {
+            background: #111827;
+        }
+
+        .sin-capturas {
+            color: #6b7280;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .datos {
+                grid-template-columns: 1fr;
+            }
+
+            .tracking {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+
+    <!-- ENCABEZADO -->
+
+    <div class="tarjeta encabezado">
+
+        <div class="tracking">
+            {{ orden.tracking_id }}
+        </div>
+
+        <div class="cliente">
+
+            Cliente #{{ orden.cliente.customer_number }}
+            —
+            {{ orden.cliente.nombre }}
+            {{ orden.cliente.apellidos }}
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMACIÓN DE LA ORDEN -->
+
+    <div class="tarjeta">
+
+        <h2>Información de la orden</h2>
+
+        <div class="datos">
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Tipo de orden
+                </span>
+
+                <span class="valor">
+                    {{ orden.tipo }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Producto
+                </span>
+
+                <span class="valor">
+                    {{ orden.producto }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Cantidad
+                </span>
+
+                <span class="valor">
+                    {{ orden.cantidad }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Peso
+                </span>
+
+                <span class="valor">
+                    {{ orden.peso }} lb
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Estado actual
+                </span>
+
+                <td class="estado">
+
+                    {% if orden.estado == "recibida" %}
+                        Recibida
+                    {% elif orden.estado == "revision" %}
+                        En revisión
+                    {% elif orden.estado == "info_requerida" %}
+                        Información requerida
+                    {% elif orden.estado == "confirmada" %}
+                        Confirmada
+                    {% elif orden.estado == "pago_pendiente" %}
+                        Pago pendiente
+                    {% elif orden.estado == "pago_recibido" %}
+                        Pago recibido
+                    {% elif orden.estado == "preparando" %}
+                        Preparando
+                    {% elif orden.estado == "transito" %}
+                        En tránsito
+                    {% elif orden.estado == "cuba" %}
+                        En Cuba
+                    {% elif orden.estado == "disponible" %}
+                        Disponible
+                    {% elif orden.estado == "entregada" %}
+                        Entregada
+                    {% elif orden.estado == "cancelada" %}
+                        Cancelada
+                    {% else %}
+                        {{ orden.estado }}
+                    {% endif %}
+
+                </td>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Fecha de creación
+                </span>
+
+                <span class="valor">
+                    {{ orden.fecha_creacion|date:"d/m/Y H:i" }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Última actualización
+                </span>
+
+                <span class="valor">
+                    {{ orden.fecha_actualizacion|date:"d/m/Y H:i" }}
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- DATOS DEL DESTINATARIO -->
+
+    <div class="tarjeta">
+
+        <h2>Datos del destinatario</h2>
+
+        <div class="datos">
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Nombre
+                </span>
+
+                <span class="valor">
+                    {{ orden.cliente.nombre }}
+                    {{ orden.cliente.apellidos }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Teléfono
+                </span>
+
+                <span class="valor">
+                    {{ orden.cliente.telefono|default:"—" }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Dirección
+                </span>
+
+                <span class="valor">
+                    {{ orden.cliente.direccion|default:"—" }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span class="etiqueta">
+                    Observaciones
+                </span>
+
+                <span class="valor">
+                    {{ orden.observaciones|default:"—" }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- COMPROBANTES -->
+
+    <div class="tarjeta">
+
+        <h2>Comprobantes</h2>
+
+        {% if orden.capturas.all %}
+
+            <div class="capturas">
+
+                <a
+                    href="{% url 'galeria_capturas' orden.tracking_id %}"
+                    class="boton"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Ver comprobantes
+                </a>
+
+            </div>
+
+        {% else %}
+
+            <div class="sin-capturas">
+                Esta orden no tiene comprobantes cargados.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- NAVEGACIÓN -->
+
+    <div class="tarjeta">
+
+        <a
+            href="{% url 'panel_operaciones' %}"
+            class="boton boton-secundario"
+        >
+            ← Volver al panel
+        </a>
+
+        <a
+            href="{% url 'detalle_cliente' orden.cliente.customer_number %}"
+            class="boton"
+        >
+            Ver cliente
+        </a>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

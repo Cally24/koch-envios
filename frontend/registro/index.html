@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registro | KOCH ENVÍOS</title>
+
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f6f7f9;
+            color: #172033;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 15px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header img {
+            height: 72px;
+            width: auto;
+        }
+
+        header a {
+            color: #172033;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            width: min(700px, 92%);
+            margin: 50px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 10px 35px rgba(0,0,0,.07);
+        }
+
+        h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            color: #687184;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d7dce4;
+            border-radius: 9px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #d71920;
+        }
+
+        .required {
+            color: #d71920;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            background: #d71920;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #b9141a;
+        }
+
+        #registroResult {
+            display: none;
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 10px;
+            background: #f1f5f9;
+            line-height: 1.7;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            color: #172033;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #737b8c;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="/home">
+        <img src="/logo.png" alt="KOCH ENVÍOS">
+    </a>
+
+    <a href="/home">← Volver a inicio</a>
+</header>
+
+<main class="container">
+
+    <div class="card">
+
+        <h1>Crear cuenta de cliente</h1>
+
+        <p class="intro">
+            Regístrate en KOCH ENVÍOS para obtener tu Número de Cliente.
+            Lo necesitarás posteriormente para crear y consultar tus órdenes.
+        </p>
+
+        <form id="registroForm" onsubmit="registrarCliente(event)">
+
+            <div class="form-group">
+                <label for="reg_nombre">
+                    Nombre <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="reg_nombre"
+                    name="nombre"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reg_apellidos">
+                    Apellidos <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="reg_apellidos"
+                    name="apellidos"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reg_telefono">
+                    Teléfono <span class="required">*</span>
+                </label>
+
+                <input
+                    type="tel"
+                    id="reg_telefono"
+                    name="telefono"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reg_email">
+                    Email <span class="required">*</span>
+                </label>
+
+                <input
+                    type="email"
+                    id="reg_email"
+                    name="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reg_direccion">
+                    Dirección <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="reg_direccion"
+                    name="direccion"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reg_ciudad">
+                    Ciudad <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="reg_ciudad"
+                    name="ciudad"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reg_provincia">
+                    Provincia <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="reg_provincia"
+                    name="provincia"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reg_whatsapp">
+                    WhatsApp
+                </label>
+
+                <input
+                    type="tel"
+                    id="reg_whatsapp"
+                    name="whatsapp"
+                    placeholder="Opcional"
+                >
+            </div>
+
+            <button type="submit">
+                REGISTRARME
+            </button>
+
+        </form>
+
+        <div id="registroResult"></div>
+
+        <a class="back" href="/home">
+            ← Volver a KOCH ENVÍOS
+        </a>
+
+    </div>
+
+</main>
+
+<footer>
+    © 2026 KOCH ENVÍOS — Todos los derechos reservados.
+</footer>
+
+
+<script>
+
+async function registrarCliente(event) {
+
+    event.preventDefault();
+
+    const datos = {
+
+        nombre: document.getElementById('reg_nombre').value,
+
+        apellidos: document.getElementById('reg_apellidos').value,
+
+        telefono: document.getElementById('reg_telefono').value,
+
+        email: document.getElementById('reg_email').value,
+
+        direccion: document.getElementById('reg_direccion').value,
+
+        ciudad: document.getElementById('reg_ciudad').value,
+
+        provincia: document.getElementById('reg_provincia').value,
+
+        whatsapp: document.getElementById('reg_whatsapp').value || ''
+
+    };
+
+    const box = document.getElementById('registroResult');
+
+    box.style.display = 'block';
+
+    box.innerHTML = 'Registrando...';
+
+    try {
+
+        const response = await fetch('/api/clientes/registrar/', {
+    method: 'POST',
+
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+
+    body: new URLSearchParams(datos)
+});
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            box.innerHTML = `
+                ✅ <strong>¡Registro exitoso!</strong><br><br>
+
+                Customer Number:
+                <strong>${data.customer_number}</strong><br>
+
+                Nombre:
+                ${data.cliente.nombre} ${data.cliente.apellidos}<br><br>
+
+                <small>
+                    Guarda tu Customer Number.
+                    Lo necesitarás para futuras órdenes y para consultar tus envíos.
+                </small>
+            `;
+
+            document.getElementById('registroForm').reset();
+
+        } else {
+
+            box.innerHTML =
+                `❌ ${data.error || 'Error al registrar el cliente'}`;
+
+        }
+
+    } catch (error) {
+
+        box.innerHTML =
+            '⚠️ No se pudo conectar con el servidor.';
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+
